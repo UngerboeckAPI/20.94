@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{17DB159F-9333-48B8-86E6-1F93EEC27620}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Examples</RootNamespace>
+    <AssemblyName>Examples</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UngerboeckSDKPackage">
+      <HintPath>..\..\..\Bin\UngerboeckSDKPackage.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Operations\AccountAffiliations.cs" />
+    <Compile Include="Operations\AccountMailingLists.cs" />
+    <Compile Include="Operations\AccountProductsAndServices.cs" />
+    <Compile Include="Operations\Accounts.cs" />
+    <Compile Include="Operations\AccountsReceivableVouchers.cs" />
+    <Compile Include="Operations\AccountTypes.cs" />
+    <Compile Include="Operations\Activities.cs" />
+    <Compile Include="Operations\Affiliations.cs" />
+    <Compile Include="Operations\AlternateAddresses.cs" />
+    <Compile Include="Operations\APDemographics.cs" />
+    <Compile Include="Operations\ARDemographics.cs" />
+    <Compile Include="Operations\Base.cs" />
+    <Compile Include="Operations\Bookings.cs" />
+    <Compile Include="Operations\Booths.cs" />
+    <Compile Include="Operations\BulletinApproval.cs" />
+    <Compile Include="Operations\Bulletins.cs" />
+    <Compile Include="Operations\Campaigns.cs" />
+    <Compile Include="Operations\Communications.cs" />
+    <Compile Include="Operations\Concessions.cs" />
+    <Compile Include="Operations\Contracts.cs" />
+    <Compile Include="Operations\Countries.cs" />
+    <Compile Include="Operations\CustomerTerms.cs" />
+    <Compile Include="Operations\CustomFieldSets.cs" />
+    <Compile Include="Operations\CustomFieldValidationTables.cs" />
+    <Compile Include="Operations\Cycles.cs" />
+    <Compile Include="Operations\Departments.cs" />
+    <Compile Include="Operations\Distributions.cs" />
+    <Compile Include="Operations\DocumentClasses.cs" />
+    <Compile Include="Operations\Documents.cs" />
+    <Compile Include="Operations\EventJobCategories.cs" />
+    <Compile Include="Operations\EventJobClasses.cs" />
+    <Compile Include="Operations\EventJobTypes.cs" />
+    <Compile Include="Operations\EventProductsAndServices.cs" />
+    <Compile Include="Operations\Events.cs" />
+    <Compile Include="Operations\EventsPriceList.cs" />
+    <Compile Include="Operations\EventStatuses.cs" />
+    <Compile Include="Operations\Exhibitors.cs" />
+    <Compile Include="Operations\Functions.cs" />
+    <Compile Include="Operations\General.cs" />
+    <Compile Include="Operations\GLAccounts.cs" />
+    <Compile Include="Operations\Invoices.cs" />
+    <Compile Include="Operations\JournalEntries.cs" />
+    <Compile Include="Operations\JournalEntryDetails.cs" />
+    <Compile Include="Operations\MailingLists.cs" />
+    <Compile Include="Operations\MarketSegments.cs" />
+    <Compile Include="Operations\MeetingFlowPattern.cs" />
+    <Compile Include="Operations\MeetingNotes.cs" />
+    <Compile Include="Operations\Meetings.cs" />
+    <Compile Include="Operations\MembershipOrderItems.cs" />
+    <Compile Include="Operations\MembershipOrders.cs" />
+    <Compile Include="Operations\Notes.cs" />
+    <Compile Include="Operations\Opportunities.cs" />
+    <Compile Include="Operations\OpportunityStatuses.cs" />
+    <Compile Include="Operations\OrderRegistrants.cs" />
+    <Compile Include="Operations\OrganizationParameters.cs" />
+    <Compile Include="Operations\PaymentPlanDetails.cs" />
+    <Compile Include="Operations\PaymentPlanHeaders.cs" />
+    <Compile Include="Operations\PaymentPlans.cs" />
+    <Compile Include="Operations\Payments.cs" />
+    <Compile Include="Operations\PreferenceSettings.cs" />
+    <Compile Include="Operations\PriceList.cs" />
+    <Compile Include="Operations\PriceListItems.cs" />
+    <Compile Include="Operations\ProductsAndServices.cs" />
+    <Compile Include="Operations\PurchaseOrderItems.cs" />
+    <Compile Include="Operations\PurchaseOrders.cs" />
+    <Compile Include="Operations\Quotes.cs" />
+    <Compile Include="Operations\RegistrationOrderItems.cs" />
+    <Compile Include="Operations\RegistrationOrders.cs" />
+    <Compile Include="Operations\Relationships.cs" />
+    <Compile Include="Operations\RelationshipTypes.cs" />
+    <Compile Include="Operations\RequisitionApproval.cs" />
+    <Compile Include="Operations\RequisitionItems.cs" />
+    <Compile Include="Operations\Requisitions.cs" />
+    <Compile Include="Operations\Resources.cs" />
+    <Compile Include="Operations\ServiceOrderItems.cs" />
+    <Compile Include="Operations\ServiceOrders.cs" />
+    <Compile Include="Operations\Setups.cs" />
+    <Compile Include="Operations\SpaceFeatures.cs" />
+    <Compile Include="Operations\Spaces.cs" />
+    <Compile Include="Operations\SpaceSetups.cs" />
+    <Compile Include="Operations\TransactionMethods.cs" />
+    <Compile Include="Operations\UserDefinedFields.cs" />
+    <Compile Include="Operations\ValidationEntries.cs" />
+    <Compile Include="Operations\Webhooks.cs" />
+    <Compile Include="Operations\WorkOrderItems.cs" />
+    <Compile Include="Operations\WorkOrders.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UngerboeckSDKWrapper\UngerboeckSDKWrapper.csproj">
+      <Project>{54aa76b0-e061-4467-8625-5c16ede638f0}</Project>
+      <Name>UngerboeckSDKWrapper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

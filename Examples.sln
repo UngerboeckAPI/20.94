@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UngerboeckSDKWrapper", "UngerboeckSDKWrapper\UngerboeckSDKWrapper.csproj", "{54AA76B0-E061-4467-8625-5C16EDE638F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{17DB159F-9333-48B8-86E6-1F93EEC27620}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54AA76B0-E061-4467-8625-5C16EDE638F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54AA76B0-E061-4467-8625-5C16EDE638F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54AA76B0-E061-4467-8625-5C16EDE638F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54AA76B0-E061-4467-8625-5C16EDE638F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17DB159F-9333-48B8-86E6-1F93EEC27620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17DB159F-9333-48B8-86E6-1F93EEC27620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17DB159F-9333-48B8-86E6-1F93EEC27620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17DB159F-9333-48B8-86E6-1F93EEC27620}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {246C6F48-D352-49AD-9802-2A407F8BA057}
+	EndGlobalSection
+EndGlobal
