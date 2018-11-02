@@ -7,11 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UngerboeckSDKWrapper", "Ung
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{17DB159F-9333-48B8-86E6-1F93EEC27620}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleApp", "ExampleApp\ExampleApp.csproj", "{F5ABE2F8-76BB-4D7B-9A15-D46CE83AEF69}"
-	ProjectSection(ProjectDependencies) = postProject
-		{17DB159F-9333-48B8-86E6-1F93EEC27620} = {17DB159F-9333-48B8-86E6-1F93EEC27620}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,5 +28,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
+	EndGlobalSection	
 EndGlobal
