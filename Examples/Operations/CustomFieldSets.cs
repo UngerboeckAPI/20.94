@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>  
     public CustomFieldSetsModel Get(string orgCode, string Class, string code)
     {
-      return APIUtil.GetCustomFieldSets(USISDKClient, orgCode, Class, code);
+      return APIUtil.GetCustomFieldSet(USISDKClient, orgCode, Class, code);
     }
 
     /// <summary>

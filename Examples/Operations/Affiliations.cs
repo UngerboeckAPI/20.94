@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>  
     public AffiliationsModel Get(string orgCode, string affiliationCode)
     {
-      return APIUtil.GetAffiliations(USISDKClient, orgCode, affiliationCode);
+      return APIUtil.GetAffiliation(USISDKClient, orgCode, affiliationCode);
     }
 
     /// <summary>

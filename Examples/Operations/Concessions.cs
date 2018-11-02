@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public ConcessionsModel Get(string orgCode, int sequenceNumber)
     {
-      return APIUtil.GetConcessions(USISDKClient, orgCode, sequenceNumber);
+      return APIUtil.GetConcession(USISDKClient, orgCode, sequenceNumber);
     }
 
     /// <summary>

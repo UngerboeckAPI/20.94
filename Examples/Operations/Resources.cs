@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public ResourcesModel Get(string orgCode, int sequence)
     {
-      return APIUtil.GetResources(USISDKClient, orgCode, sequence);
+      return APIUtil.GetResource(USISDKClient, orgCode, sequence);
     }
 
     /// <summary>

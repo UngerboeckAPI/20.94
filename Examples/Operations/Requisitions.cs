@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public RequisitionsModel Get(string orgCode, int number)
     {
-      return APIUtil.GetRequisitions(USISDKClient, orgCode, number);
+      return APIUtil.GetRequisition(USISDKClient, orgCode, number);
     }
 
     /// <summary>

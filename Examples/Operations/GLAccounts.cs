@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public GlAccountsModel Get(string orgCode, string gLAccount, string subAccount)
     {
-      return APIUtil.GetGLAccounts(USISDKClient, orgCode, gLAccount, subAccount);
+      return APIUtil.GetGLAccount(USISDKClient, orgCode, gLAccount, subAccount);
     }
 
     /// <summary>

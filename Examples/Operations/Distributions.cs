@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public DistributionsModel Get(string orgCode, string bulletinApplication, int meeting, int bulletin, int distributionEntrySeqNbr)
     {
-      return APIUtil.GetDistributions(USISDKClient, orgCode, bulletinApplication, meeting, bulletin, distributionEntrySeqNbr);
+      return APIUtil.GetDistribution(USISDKClient, orgCode, bulletinApplication, meeting, bulletin, distributionEntrySeqNbr);
     }
 
     /// <summary>

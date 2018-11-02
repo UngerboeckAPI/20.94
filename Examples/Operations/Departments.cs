@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public DepartmentsModel Get(string orgCode, string code)
     {
-      return APIUtil.GetDepartments(USISDKClient, orgCode, code);
+      return APIUtil.GetDepartment(USISDKClient, orgCode, code);
     }
 
     /// <summary>

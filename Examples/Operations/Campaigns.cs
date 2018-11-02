@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public CampaignsModel Get(string orgCode, string ID, string designation)
     {
-      return APIUtil.GetCampaigns(USISDKClient, orgCode, ID, designation);
+      return APIUtil.GetCampaign(USISDKClient, orgCode, ID, designation);
     }
 
     /// <summary>

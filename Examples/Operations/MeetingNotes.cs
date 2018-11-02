@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public MeetingNotesModel Get(string orgCode, string bulletinApplication, int meeting, int bulletinSeqNbr, int sequenceNbr)
     {
-      return APIUtil.GetMeetingNotes(USISDKClient, orgCode, bulletinApplication, meeting, bulletinSeqNbr, sequenceNbr);
+      return APIUtil.GetMeetingNote(USISDKClient, orgCode, bulletinApplication, meeting, bulletinSeqNbr, sequenceNbr);
     }
 
     /// <summary>

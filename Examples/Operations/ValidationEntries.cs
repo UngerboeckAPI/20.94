@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public ValidationEntriesModel Get(string orgCode, int validationTableID, int sequenceNumber)
     {
-      return APIUtil.GetValidationEntries(USISDKClient, orgCode, validationTableID, sequenceNumber);
+      return APIUtil.GetValidationEntry(USISDKClient, orgCode, validationTableID, sequenceNumber);
     }
 
     /// <summary>

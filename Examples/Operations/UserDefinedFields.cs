@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public UserDefinedFieldsModel Get(string orgCode, string issueOpportunityClass, string issueOpportunityType, int sequenceNumber)
     {
-      return APIUtil.GetUserDefinedFields(USISDKClient, orgCode, issueOpportunityClass, issueOpportunityType, sequenceNumber);
+      return APIUtil.GetUserDefinedField(USISDKClient, orgCode, issueOpportunityClass, issueOpportunityType, sequenceNumber);
     }
 
     /// <summary>

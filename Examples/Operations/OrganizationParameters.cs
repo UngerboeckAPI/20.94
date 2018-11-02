@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public OrganizationParametersModel Get(string orgCode, string applicationCode, string parameterCode)
     {
-      return APIUtil.GetOrganizationParameters(USISDKClient, orgCode, applicationCode, parameterCode);
+      return APIUtil.GetOrganizationParameter(USISDKClient, orgCode, applicationCode, parameterCode);
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public PaymentPlanHeadersModel Get(string orgCode, int payPlanID, int payNumber)
     {
-      return APIUtil.GetPaymentPlanHeaders(USISDKClient, orgCode, payPlanID, payNumber);
+      return APIUtil.GetPaymentPlanHeader(USISDKClient, orgCode, payPlanID, payNumber);
     }
 
     /// <summary>

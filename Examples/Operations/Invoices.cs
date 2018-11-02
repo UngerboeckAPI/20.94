@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public InvoicesModel Get(string orgCode, string source, int invoiceNumber)
     {
-      return APIUtil.GetInvoices(USISDKClient, orgCode, invoiceNumber, source);
+      return APIUtil.GetInvoice(USISDKClient, orgCode, invoiceNumber, source);
     }
 
     /// <summary>
@@ -33,7 +33,7 @@ namespace Examples.Operations
     /// </summary> 
     public InvoicesModel Edit(string orgCode, int invoice, string source, string newStatus)
     {
-      var myInvoice = APIUtil.GetInvoices(USISDKClient, orgCode, invoice, source);
+      var myInvoice = APIUtil.GetInvoice(USISDKClient, orgCode, invoice, source);
 
       myInvoice.CollectionStatus = newStatus;
 

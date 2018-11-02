@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>  
     public AccountMailingListsModel Get(string orgCode, int iD)
     {
-      return APIUtil.GetAccountMailingLists(USISDKClient, orgCode, iD);
+      return APIUtil.GetAccountMailingList(USISDKClient, orgCode, iD);
     }
 
     /// <summary>

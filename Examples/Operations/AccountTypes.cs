@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public AccountTypesModel Get(string orgCode, string code)
     {
-      return APIUtil.GetAccountTypes(USISDKClient, orgCode, code);
+      return APIUtil.GetAccountType(USISDKClient, orgCode, code);
     }
 
     /// <summary>

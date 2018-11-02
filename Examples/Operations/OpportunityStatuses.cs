@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public OpportunityStatusesModel Get(string orgCode, string code, string designation)
     {
-      return APIUtil.GetOpportunityStatuses(USISDKClient, orgCode, code, designation);
+      return APIUtil.GetOpportunityStatus(USISDKClient, orgCode, code, designation);
     }
 
     /// <summary>

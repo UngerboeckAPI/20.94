@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>  
     public CustomerTermsModel Get(string orgCode, string code)
     {
-      return APIUtil.GetCustomerTerms(USISDKClient, orgCode, code);
+      return APIUtil.GetCustomerTerm(USISDKClient, orgCode, code);
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public DocumentClassesModel Get(string orgCode, string Class)
     {
-      return APIUtil.GetDocumentClasses(USISDKClient, orgCode, Class);
+      return APIUtil.GetDocumentClass(USISDKClient, orgCode, Class);
     }
 
     /// <summary>

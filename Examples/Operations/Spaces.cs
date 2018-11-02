@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public SpacesModel Get(string orgCode, string code)
     {
-      return APIUtil.GetSpaces(USISDKClient, orgCode, code);
+      return APIUtil.GetSpace(USISDKClient, orgCode, code);
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ namespace Examples.Operations
     /// </summary>  
     public SpacesModel Edit(string orgCode, string code, string newText)
     {
-      var mySpace = APIUtil.GetSpaces(USISDKClient, orgCode, code);
+      var mySpace = APIUtil.GetSpace(USISDKClient, orgCode, code);
 
       mySpace.SpaceDescription = newText;
 

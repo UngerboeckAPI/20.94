@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public QuotesModel Get(string orgCode, int sequence)
     {
-      return APIUtil.GetQuotes(USISDKClient, orgCode, sequence);
+      return APIUtil.GetQuote(USISDKClient, orgCode, sequence);
     }
 
     /// <summary>

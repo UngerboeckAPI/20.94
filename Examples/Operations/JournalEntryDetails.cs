@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public JournalEntryDetailsModel Get(string orgCode, int year, int period, string source, string entryNumber, int line)
     {
-      return APIUtil.GetJournalEntryDetails(USISDKClient, orgCode, year, period, source, entryNumber, line);
+      return APIUtil.GetJournalEntryDetail(USISDKClient, orgCode, year, period, source, entryNumber, line);
     }
 
     /// <summary>

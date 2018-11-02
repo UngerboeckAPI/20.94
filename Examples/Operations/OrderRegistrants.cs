@@ -12,7 +12,7 @@ namespace Examples.Operations
     }
     public OrderRegistrantsModel Get(string orgCode, int registrantSequenceNbr)
     {
-      return APIUtil.GetOrderRegistrants(USISDKClient, orgCode, registrantSequenceNbr);
+      return APIUtil.GetOrderRegistrant(USISDKClient, orgCode, registrantSequenceNbr);
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ namespace Examples.Operations
     /// </summary> 
     public OrderRegistrantsModel Edit(string orgCode, int registrantSequenceNbr, string strNewUserFieldText)
     {
-      var myOrderRegistrant = APIUtil.GetOrderRegistrants(USISDKClient, orgCode, registrantSequenceNbr);
+      var myOrderRegistrant = APIUtil.GetOrderRegistrant(USISDKClient, orgCode, registrantSequenceNbr);
 
       myOrderRegistrant.RegistrantUserFields.UserText01 = strNewUserFieldText;
 

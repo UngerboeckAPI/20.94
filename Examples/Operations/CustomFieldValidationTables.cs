@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public CustomFieldValidationTablesModel Get(string orgCode, int ID)
     {
-      return APIUtil.GetCustomFieldValidationTables(USISDKClient, orgCode, ID);
+      return APIUtil.GetCustomFieldValidationTable(USISDKClient, orgCode, ID);
     }
 
     /// <summary>

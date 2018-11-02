@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>  
     public BoothsModel Get(string orgCode, int sequenceNumber)
     {
-      return APIUtil.GetBooths(USISDKClient, orgCode, sequenceNumber);
+      return APIUtil.GetBooth(USISDKClient, orgCode, sequenceNumber);
     }
 
     /// <summary>

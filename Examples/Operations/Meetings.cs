@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public MeetingsModel Get(string orgCode, int meetingSequence)
     {
-      return APIUtil.GetMeetings(USISDKClient, orgCode, meetingSequence);
+      return APIUtil.GetMeeting(USISDKClient, orgCode, meetingSequence);
     }
 
     /// <summary>

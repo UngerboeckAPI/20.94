@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>  
     public AlternateAddressesModel Get(string orgCode, string account, int sequenceNumber, string recordType)
     {
-      return APIUtil.GetAlternateAddresses(USISDKClient, orgCode, account, sequenceNumber, recordType);
+      return APIUtil.GetAlternateAddress(USISDKClient, orgCode, account, sequenceNumber, recordType);
     }
 
     /// <summary>

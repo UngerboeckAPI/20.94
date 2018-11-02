@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public WorkOrderItemsModel Get(string orgCode, int OrderNbr, int OrderLineNbr)
     {
-      return APIUtil.GetWorkOrderItems(USISDKClient, orgCode, OrderNbr, OrderLineNbr);
+      return APIUtil.GetWorkOrderItem(USISDKClient, orgCode, OrderNbr, OrderLineNbr);
     }
 
     /// <summary>

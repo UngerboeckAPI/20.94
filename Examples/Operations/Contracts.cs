@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>  
     public ContractsModel Get(string orgCode, int sequence)
     {
-      return APIUtil.GetContracts(USISDKClient, orgCode, sequence);
+      return APIUtil.GetContract(USISDKClient, orgCode, sequence);
     }
 
     /// <summary>

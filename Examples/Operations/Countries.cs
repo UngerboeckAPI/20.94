@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>  
     public CountriesModel Get(string orgCode, string code)
     {
-      return APIUtil.GetCountries(USISDKClient, orgCode, code);
+      return APIUtil.GetCountry(USISDKClient, orgCode, code);
     }
 
     /// <summary>

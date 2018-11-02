@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public PreferenceSettingsModel Get(string orgCode, int ID)
     {
-      return APIUtil.GetPreferenceSettings(USISDKClient, orgCode, ID);
+      return APIUtil.GetPreferenceSetting(USISDKClient, orgCode, ID);
     }
 
     /// <summary>
@@ -48,7 +48,7 @@ namespace Examples.Operations
     /// </summary>    
     public PreferenceSettingsModel Edit(string orgCode, int ID, string newConsentGiven)
     {
-      var myPreferenceSetting = APIUtil.GetPreferenceSettings(USISDKClient, orgCode, ID);
+      var myPreferenceSetting = APIUtil.GetPreferenceSetting(USISDKClient, orgCode, ID);
 
       myPreferenceSetting.ConsentGiven = newConsentGiven;
 

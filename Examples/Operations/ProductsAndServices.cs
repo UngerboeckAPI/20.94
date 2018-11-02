@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public ProductsAndServicesModel Get(string orgCode, string code)
     {
-      return APIUtil.GetProductsAndServices(USISDKClient, orgCode, code);
+      return APIUtil.GetProductsAndService(USISDKClient, orgCode, code);
     }
 
     /// <summary>

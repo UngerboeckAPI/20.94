@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public RelationshipTypesModel Get(string orgCode, string code)
     {
-      return APIUtil.GetRelationshipTypes(USISDKClient, orgCode, code);
+      return APIUtil.GetRelationshipType(USISDKClient, orgCode, code);
     }
 
     /// <summary>

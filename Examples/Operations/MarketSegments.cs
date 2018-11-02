@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public MarketSegmentsModel Get(string orgCode, string major, string minor)
     {
-      return APIUtil.GetMarketSegments(USISDKClient, orgCode, major, minor);
+      return APIUtil.GetMarketSegment(USISDKClient, orgCode, major, minor);
     }
 
     /// <summary>

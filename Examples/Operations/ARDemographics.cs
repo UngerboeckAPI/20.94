@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>  
     public ARDemographicsModel Get(string orgCode, string account)
     {
-      return APIUtil.GetARDemographics(USISDKClient, orgCode, account);
+      return APIUtil.GetARDemographic(USISDKClient, orgCode, account);
     }
 
     /// <summary>

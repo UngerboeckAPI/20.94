@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>  
     public AccountsReceivableVouchersModel Get(string orgCode, int voucherSequence)
     {
-      return APIUtil.GetAccountsReceivableVouchers(USISDKClient, orgCode, voucherSequence);
+      return APIUtil.GetAccountsReceivableVoucher(USISDKClient, orgCode, voucherSequence);
     }
 
     /// <summary>

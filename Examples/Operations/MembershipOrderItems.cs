@@ -105,8 +105,8 @@ namespace Examples.Operations
       myMembershipOrderItem.UseSeasonal = "N";
       myMembershipOrderItem.StartDate = System.DateTime.Now;
       myMembershipOrderItem.StartTime = System.DateTime.Now;
-      myMembershipOrderItem.EndDate = System.DateTime.Now;
-      myMembershipOrderItem.EndTime = System.DateTime.Now;
+      myMembershipOrderItem.EndDate = System.DateTime.Now.AddDays(1);
+      myMembershipOrderItem.EndTime = System.DateTime.Now.AddDays(1);
       myMembershipOrderItem.UserText = "User Text";
 
 

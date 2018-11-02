@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public SetupsModel Get(string orgCode, string code)
     {
-      return APIUtil.GetSetups(USISDKClient, orgCode, code);
+      return APIUtil.GetSetup(USISDKClient, orgCode, code);
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public WebhooksModel Get(string orgCode, int sequenceNbr)
     {
-      return APIUtil.GetWebHooks(USISDKClient, orgCode, sequenceNbr);
+      return APIUtil.GetWebHook(USISDKClient, orgCode, sequenceNbr);
     }
 
     /// <summary>

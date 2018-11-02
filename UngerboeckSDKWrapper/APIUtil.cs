@@ -242,47 +242,88 @@ namespace UngerboeckSDKWrapper
           $"{USISDKClient.BaseAddress}/api/v1/AccountAffiliations/{astrOrgCode}/{astrAccountCode}/{astrAffiliationCode}").ConfigureAwait(false);
       APIUtil.SuccessResponse(response);
     }
-    public static UngerboeckSDKPackage.AccountMailingListsModel GetAccountMailingLists(HttpClient USISDKClient, string astrOrgCode, int aintID)
+
+    public static UngerboeckSDKPackage.AccountMailingListsModel GetAccountMailingList(HttpClient USISDKClient, string astrOrgCode, int aintID)
     {
       Task<UngerboeckSDKPackage.AccountMailingListsModel> accountMailingListsTask =
           GetAsync<UngerboeckSDKPackage.AccountMailingListsModel>(USISDKClient, $"AccountMailingLists/{astrOrgCode}/{aintID}");
       return accountMailingListsTask.Result;
     }
-    public static UngerboeckSDKPackage.AccountsReceivableVouchersModel GetAccountsReceivableVouchers(HttpClient USISDKClient, string astrOrgCode, int aintVoucherSequence)
+    [Obsolete("Use GetAccountMailingList to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.AccountMailingListsModel GetAccountMailingLists(HttpClient USISDKClient, string astrOrgCode, int aintID)
+    {
+      return GetAccountMailingList(USISDKClient, astrOrgCode, aintID);
+    }
+    public static UngerboeckSDKPackage.AccountsReceivableVouchersModel GetAccountsReceivableVoucher(HttpClient USISDKClient, string astrOrgCode, int aintVoucherSequence)
     {
       Task<UngerboeckSDKPackage.AccountsReceivableVouchersModel> accountsReceivableVouchersTask =
           GetAsync<UngerboeckSDKPackage.AccountsReceivableVouchersModel>(USISDKClient, $"AccountsReceivableVouchers/{astrOrgCode}/{aintVoucherSequence}");
       return accountsReceivableVouchersTask.Result;
     }
+    [Obsolete("Use GetAccountsReceivableVoucher to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.AccountsReceivableVouchersModel GetAccountsReceivableVouchers(HttpClient USISDKClient, string astrOrgCode, int aintVoucherSequence)
+    {      
+      return GetAccountsReceivableVoucher(USISDKClient, astrOrgCode, aintVoucherSequence);
+    }
+    public static UngerboeckSDKPackage.AccountTypesModel GetAccountType(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.AccountTypesModel> accountTypesTask =
+          GetAsync<UngerboeckSDKPackage.AccountTypesModel>(USISDKClient, $"AccountTypes/{astrOrgCode}/{astrCode}");
+      return accountTypesTask.Result;
+    }
+    [Obsolete("Use GetAccountType to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.AccountTypesModel GetAccountTypes(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.AccountTypesModel> accountTypesTask =
           GetAsync<UngerboeckSDKPackage.AccountTypesModel>(USISDKClient, $"AccountTypes/{astrOrgCode}/{astrCode}");
       return accountTypesTask.Result;
     }
-    public static UngerboeckSDKPackage.AffiliationsModel GetAffiliations(HttpClient USISDKClient, string astrOrgCode, string astrAffiliationCode)
+    public static UngerboeckSDKPackage.AffiliationsModel GetAffiliation(HttpClient USISDKClient, string astrOrgCode, string astrAffiliationCode)
     {
       Task<UngerboeckSDKPackage.AffiliationsModel> affiliationsTask =
           GetAsync<UngerboeckSDKPackage.AffiliationsModel>(USISDKClient, $"Affiliations/{astrOrgCode}/{astrAffiliationCode}");
       return affiliationsTask.Result;
     }
-    public static UngerboeckSDKPackage.AlternateAddressesModel GetAlternateAddresses(HttpClient USISDKClient, string astrOrgCode, string astrAccount, int aintSequenceNumber, string astrRecordType)
+    [Obsolete("Use GetAffiliation to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.AffiliationsModel GetAffiliations(HttpClient USISDKClient, string astrOrgCode, string astrAffiliationCode)
+    {      
+      return GetAffiliation(USISDKClient, astrOrgCode, astrAffiliationCode);
+    }
+    public static UngerboeckSDKPackage.AlternateAddressesModel GetAlternateAddress(HttpClient USISDKClient, string astrOrgCode, string astrAccount, int aintSequenceNumber, string astrRecordType)
     {
       Task<UngerboeckSDKPackage.AlternateAddressesModel> alternateAddressesTask =
           GetAsync<UngerboeckSDKPackage.AlternateAddressesModel>(USISDKClient, $"AlternateAddresses/{astrOrgCode}/{astrAccount}/{aintSequenceNumber}/{astrRecordType}");
       return alternateAddressesTask.Result;
     }
-    public static UngerboeckSDKPackage.APDemographicsModel GetAPDemographics(HttpClient USISDKClient, string astrOrgCode, string astrSupplier)
+    [Obsolete("Use GetAlternateAddress to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.AlternateAddressesModel GetAlternateAddresses(HttpClient USISDKClient, string astrOrgCode, string astrAccount, int aintSequenceNumber, string astrRecordType)
+    {
+      Task<UngerboeckSDKPackage.AlternateAddressesModel> alternateAddressesTask =
+          GetAsync<UngerboeckSDKPackage.AlternateAddressesModel>(USISDKClient, $"AlternateAddresses/{astrOrgCode}/{astrAccount}/{aintSequenceNumber}/{astrRecordType}");
+      return alternateAddressesTask.Result;
+    }    
+    public static UngerboeckSDKPackage.APDemographicsModel GetAPDemographic(HttpClient USISDKClient, string astrOrgCode, string astrSupplier)
     {
       Task<UngerboeckSDKPackage.APDemographicsModel> aPDemographicsTask =
           GetAsync<UngerboeckSDKPackage.APDemographicsModel>(USISDKClient, $"APDemographics/{astrOrgCode}/{astrSupplier}");
       return aPDemographicsTask.Result;
     }
-    public static UngerboeckSDKPackage.ARDemographicsModel GetARDemographics(HttpClient USISDKClient, string astrOrgCode, string astrAccount)
+    [Obsolete("Use GetAPDemographic to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.APDemographicsModel GetAPDemographics(HttpClient USISDKClient, string astrOrgCode, string astrSupplier)
+    {      
+      return GetAPDemographic(USISDKClient, astrOrgCode, astrSupplier);
+    }
+    public static UngerboeckSDKPackage.ARDemographicsModel GetARDemographic(HttpClient USISDKClient, string astrOrgCode, string astrAccount)
     {
       Task<UngerboeckSDKPackage.ARDemographicsModel> aRDemographicsTask =
           GetAsync<UngerboeckSDKPackage.ARDemographicsModel>(USISDKClient, $"ARDemographics/{astrOrgCode}/{astrAccount}");
       return aRDemographicsTask.Result;
+    }
+    [Obsolete("Use GetARDemographic to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.ARDemographicsModel GetARDemographics(HttpClient USISDKClient, string astrOrgCode, string astrAccount)
+    {
+      
+      return GetARDemographic(USISDKClient, astrOrgCode, astrAccount);
     }
     public static UngerboeckSDKPackage.AccountsProductsAndServicesModel GetAccountProductService(HttpClient USISDKClient, string astrOrgCode, string astrAccountCode, string astrProductServiceCode)
     {
@@ -329,12 +370,6 @@ namespace UngerboeckSDKWrapper
           $"{USISDKClient.BaseAddress}/api/v1/Activities/{astrOrgCode}/{astrAccountCode}/{aintSequenceNumber}").ConfigureAwait(false);
       APIUtil.SuccessResponse(response);
     }
-    public static UngerboeckSDKPackage.AffiliationsModel GetAffiliation(HttpClient USISDKClient, string astrOrgCode, string astrAffiliation)
-    {
-      Task<UngerboeckSDKPackage.AffiliationsModel> affiliationTask = GetAsync<UngerboeckSDKPackage.AffiliationsModel>(USISDKClient,
-          $"Affiliations/{astrOrgCode}/{astrAffiliation}");
-      return affiliationTask.Result;
-    }
 
     public static UngerboeckSDKPackage.BookingsModel AddBooking(HttpClient USISDKClient, UngerboeckSDKPackage.BookingsModel booking)
     {
@@ -367,11 +402,16 @@ namespace UngerboeckSDKWrapper
         return UpdateBooking(USISDKClient, booking);
     }
 
-    public static UngerboeckSDKPackage.BoothsModel GetBooths(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber)
+    public static UngerboeckSDKPackage.BoothsModel GetBooth(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber)
     {
       Task<UngerboeckSDKPackage.BoothsModel> boothsTask =
           GetAsync<UngerboeckSDKPackage.BoothsModel>(USISDKClient, $"Booths/{astrOrgCode}/{aintSequenceNumber}");
       return boothsTask.Result;
+    }
+    [Obsolete("Use GetBooth to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.BoothsModel GetBooths(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber)
+    {
+      return GetBooth(USISDKClient, astrOrgCode, aintSequenceNumber);
     }
     public static UngerboeckSDKPackage.BulletinApprovalModel GetBulletinApproval(HttpClient USISDKClient, string astrOrgCode, int aintMeetingSequenceNumber, int aintBulletinSequenceNumber, int aintSequenceNumber, string astrBulletinFileID)
     {
@@ -379,55 +419,113 @@ namespace UngerboeckSDKWrapper
           GetAsync<UngerboeckSDKPackage.BulletinApprovalModel>(USISDKClient, $"BulletinApproval/{astrOrgCode}/{aintMeetingSequenceNumber}/{aintBulletinSequenceNumber}/{aintSequenceNumber}/{astrBulletinFileID}");
       return bulletinApprovalTask.Result;
     }
-    public static UngerboeckSDKPackage.BulletinsModel GetBulletins(HttpClient USISDKClient, string astrOrgCode, string astrBulletinApplication, int aintMeeting, int aintBulletin)
+    public static UngerboeckSDKPackage.BulletinsModel GetBulletin(HttpClient USISDKClient, string astrOrgCode, string astrBulletinApplication, int aintMeeting, int aintBulletin)
     {
       Task<UngerboeckSDKPackage.BulletinsModel> bulletinsTask =
           GetAsync<UngerboeckSDKPackage.BulletinsModel>(USISDKClient, $"Bulletins/{astrOrgCode}/{astrBulletinApplication}/{aintMeeting}/{aintBulletin}");
       return bulletinsTask.Result;
     }
-    public static UngerboeckSDKPackage.CampaignsModel GetCampaigns(HttpClient USISDKClient, string astrOrgCode, string astrID, string astrDesignation)
+    [Obsolete("Use GetBulletin to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.BulletinsModel GetBulletins(HttpClient USISDKClient, string astrOrgCode, string astrBulletinApplication, int aintMeeting, int aintBulletin)
+    {      
+      return GetBulletin(USISDKClient, astrOrgCode, astrBulletinApplication, aintMeeting, aintBulletin);
+    }
+    public static UngerboeckSDKPackage.CampaignsModel GetCampaign(HttpClient USISDKClient, string astrOrgCode, string astrID, string astrDesignation)
     {
       Task<UngerboeckSDKPackage.CampaignsModel> campaignsTask =
           GetAsync<UngerboeckSDKPackage.CampaignsModel>(USISDKClient, $"Campaigns/{astrOrgCode}/{astrID}/{astrDesignation}");
       return campaignsTask.Result;
     }
+    [Obsolete("Use GetCampaign to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.CampaignsModel GetCampaigns(HttpClient USISDKClient, string astrOrgCode, string astrID, string astrDesignation)
+    {      
+      return GetCampaign(USISDKClient, astrOrgCode, astrID, astrDesignation);
+    }
+    public static UngerboeckSDKPackage.ConcessionsModel GetConcession(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber)
+    {
+      Task<UngerboeckSDKPackage.ConcessionsModel> concessionTask =
+          GetAsync<UngerboeckSDKPackage.ConcessionsModel>(USISDKClient, $"Concessions/{astrOrgCode}/{aintSequenceNumber}");
+      return concessionTask.Result;
+    }
+    [Obsolete("Use GetConcession to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.ConcessionsModel GetConcessions(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber)
     {
       Task<UngerboeckSDKPackage.ConcessionsModel> concessionTask =
           GetAsync<UngerboeckSDKPackage.ConcessionsModel>(USISDKClient, $"Concessions/{astrOrgCode}/{aintSequenceNumber}");
       return concessionTask.Result;
     }
+    public static UngerboeckSDKPackage.ContractsModel GetContract(HttpClient USISDKClient, string astrOrgCode, int aintSequence)
+    {
+      Task<UngerboeckSDKPackage.ContractsModel> contractTask =
+          GetAsync<UngerboeckSDKPackage.ContractsModel>(USISDKClient, $"Contracts/{astrOrgCode}/{aintSequence}");
+      return contractTask.Result;
+    }
+    [Obsolete("Use GetContract to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.ContractsModel GetContracts(HttpClient USISDKClient, string astrOrgCode, int aintSequence)
     {
       Task<UngerboeckSDKPackage.ContractsModel> contractTask =
           GetAsync<UngerboeckSDKPackage.ContractsModel>(USISDKClient, $"Contracts/{astrOrgCode}/{aintSequence}");
       return contractTask.Result;
     }
+    public static UngerboeckSDKPackage.CountriesModel GetCountry(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.CountriesModel> countryTask =
+          GetAsync<UngerboeckSDKPackage.CountriesModel>(USISDKClient, $"Countries/{astrOrgCode}/{astrCode}");
+      return countryTask.Result;
+    }
+    [Obsolete("Use GetCountry to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.CountriesModel GetCountries(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.CountriesModel> countryTask =
           GetAsync<UngerboeckSDKPackage.CountriesModel>(USISDKClient, $"Countries/{astrOrgCode}/{astrCode}");
       return countryTask.Result;
     }
+    public static UngerboeckSDKPackage.CustomerTermsModel GetCustomerTerm(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.CustomerTermsModel> customerTermTask =
+          GetAsync<UngerboeckSDKPackage.CustomerTermsModel>(USISDKClient, $"CustomerTerms/{astrOrgCode}/{astrCode}");
+      return customerTermTask.Result;
+    }
+    [Obsolete("Use GetCustomerTerm to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.CustomerTermsModel GetCustomerTerms(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.CustomerTermsModel> customerTermTask =
           GetAsync<UngerboeckSDKPackage.CustomerTermsModel>(USISDKClient, $"CustomerTerms/{astrOrgCode}/{astrCode}");
       return customerTermTask.Result;
     }
+    public static UngerboeckSDKPackage.CustomFieldSetsModel GetCustomFieldSet(HttpClient USISDKClient, string astrOrgCode, string astrClass, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.CustomFieldSetsModel> customFieldSetTask =
+          GetAsync<UngerboeckSDKPackage.CustomFieldSetsModel>(USISDKClient, $"CustomFieldSets/{astrOrgCode}/{astrClass}/{astrCode}");
+      return customFieldSetTask.Result;
+    }
+    [Obsolete("Use GetCustomFieldSet to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.CustomFieldSetsModel GetCustomFieldSets(HttpClient USISDKClient, string astrOrgCode, string astrClass, string astrCode)
     {
       Task<UngerboeckSDKPackage.CustomFieldSetsModel> customFieldSetTask =
           GetAsync<UngerboeckSDKPackage.CustomFieldSetsModel>(USISDKClient, $"CustomFieldSets/{astrOrgCode}/{astrClass}/{astrCode}");
       return customFieldSetTask.Result;
     }
+    public static UngerboeckSDKPackage.CustomFieldValidationTablesModel GetCustomFieldValidationTable(HttpClient USISDKClient, string astrOrgCode, int aintID)
+    {
+      Task<UngerboeckSDKPackage.CustomFieldValidationTablesModel> customFieldValidationTableTask =
+          GetAsync<UngerboeckSDKPackage.CustomFieldValidationTablesModel>(USISDKClient, $"CustomFieldValidationTables/{astrOrgCode}/{aintID}");
+      return customFieldValidationTableTask.Result;
+    }
+    [Obsolete("Use GetCustomFieldValidationTable to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.CustomFieldValidationTablesModel GetCustomFieldValidationTables(HttpClient USISDKClient, string astrOrgCode, int aintID)
     {
       Task<UngerboeckSDKPackage.CustomFieldValidationTablesModel> customFieldValidationTableTask =
           GetAsync<UngerboeckSDKPackage.CustomFieldValidationTablesModel>(USISDKClient, $"CustomFieldValidationTables/{astrOrgCode}/{aintID}");
       return customFieldValidationTableTask.Result;
     }
-
+    public static UngerboeckSDKPackage.CyclesModel GetCycle(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.CyclesModel> cycleTask =
+          GetAsync<UngerboeckSDKPackage.CyclesModel>(USISDKClient, $"Cycles/{astrOrgCode}/{astrCode}");
+      return cycleTask.Result;
+    }
+    [Obsolete("Use GetCycle to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.CyclesModel GetCycles(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.CyclesModel> cycleTask =
@@ -435,6 +533,13 @@ namespace UngerboeckSDKWrapper
       return cycleTask.Result;
     }
 
+    public static UngerboeckSDKPackage.DepartmentsModel GetDepartment(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.DepartmentsModel> departmentTask =
+          GetAsync<UngerboeckSDKPackage.DepartmentsModel>(USISDKClient, $"Departments/{astrOrgCode}/{astrCode}");
+      return departmentTask.Result;
+    }
+    [Obsolete("Use GetDepartment to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.DepartmentsModel GetDepartments(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.DepartmentsModel> departmentTask =
@@ -442,30 +547,59 @@ namespace UngerboeckSDKWrapper
       return departmentTask.Result;
     }
 
+    public static UngerboeckSDKPackage.DistributionsModel GetDistribution(HttpClient USISDKClient, string astrOrgCode, string astrBulletinApplication, int aintMeeting, int aintBulletin, int aintDistributionEntrySeqNbr)
+    {
+      Task<UngerboeckSDKPackage.DistributionsModel> distributionTask =
+          GetAsync<UngerboeckSDKPackage.DistributionsModel>(USISDKClient, $"Distributions/{astrOrgCode}/{astrBulletinApplication}/{aintMeeting}/{aintBulletin}/{aintDistributionEntrySeqNbr}");
+      return distributionTask.Result;
+    }
+    [Obsolete("Use GetDistribution to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.DistributionsModel GetDistributions(HttpClient USISDKClient, string astrOrgCode, string astrBulletinApplication, int aintMeeting, int aintBulletin, int aintDistributionEntrySeqNbr)
     {
       Task<UngerboeckSDKPackage.DistributionsModel> distributionTask =
           GetAsync<UngerboeckSDKPackage.DistributionsModel>(USISDKClient, $"Distributions/{astrOrgCode}/{astrBulletinApplication}/{aintMeeting}/{aintBulletin}/{aintDistributionEntrySeqNbr}");
       return distributionTask.Result;
     }
+    public static UngerboeckSDKPackage.DocumentClassesModel GetDocumentClass(HttpClient USISDKClient, string astrOrgCode, string astrClass)
+    {
+      Task<UngerboeckSDKPackage.DocumentClassesModel> documentClassTask =
+          GetAsync<UngerboeckSDKPackage.DocumentClassesModel>(USISDKClient, $"DocumentClasses/{astrOrgCode}/{astrClass}");
+      return documentClassTask.Result;
+    }
+    [Obsolete("Use GetDocumentClass to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.DocumentClassesModel GetDocumentClasses(HttpClient USISDKClient, string astrOrgCode, string astrClass)
     {
       Task<UngerboeckSDKPackage.DocumentClassesModel> documentClassTask =
           GetAsync<UngerboeckSDKPackage.DocumentClassesModel>(USISDKClient, $"DocumentClasses/{astrOrgCode}/{astrClass}");
       return documentClassTask.Result;
     }
+    [Obsolete("Use GetExhibitor to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.ExhibitorsModel GetExhibitors(HttpClient USISDKClient, string astrOrgCode, int aintExhibitorID)
     {
       Task<UngerboeckSDKPackage.ExhibitorsModel> exhibitorTask =
           GetAsync<UngerboeckSDKPackage.ExhibitorsModel>(USISDKClient, $"Exhibitors/{astrOrgCode}/{aintExhibitorID}");
       return exhibitorTask.Result;
     }
+    public static UngerboeckSDKPackage.GlAccountsModel GetGLAccount(HttpClient USISDKClient, string astrOrgCode, string astrGLAccount, string subAccount)
+    {
+      Task<UngerboeckSDKPackage.GlAccountsModel> gLAccountTask =
+          GetAsync<UngerboeckSDKPackage.GlAccountsModel>(USISDKClient, $"GLAccounts/{astrOrgCode}/{astrGLAccount}/{subAccount}");
+      return gLAccountTask.Result;
+    }
+    [Obsolete("Use GetGLAccount to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.GlAccountsModel GetGLAccounts(HttpClient USISDKClient, string astrOrgCode, string astrGLAccount, string subAccount)
     {
       Task<UngerboeckSDKPackage.GlAccountsModel> gLAccountTask =
           GetAsync<UngerboeckSDKPackage.GlAccountsModel>(USISDKClient, $"GLAccounts/{astrOrgCode}/{astrGLAccount}/{subAccount}");
       return gLAccountTask.Result;
     }
+    public static UngerboeckSDKPackage.InvoicesModel GetInvoice(HttpClient USISDKClient, string astrOrgCode, int aintInvoiceNumber, string astrSource)
+    {
+      Task<UngerboeckSDKPackage.InvoicesModel> invoicesTask =
+          GetAsync<UngerboeckSDKPackage.InvoicesModel>(USISDKClient, $"Invoices/{astrOrgCode}/{aintInvoiceNumber}/{astrSource}");
+      return invoicesTask.Result;
+    }
+    [Obsolete("Use GetInvoice to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.InvoicesModel GetInvoices(HttpClient USISDKClient, string astrOrgCode, int aintInvoiceNumber, string astrSource)
     {
       Task<UngerboeckSDKPackage.InvoicesModel> invoicesTask =
@@ -479,24 +613,52 @@ namespace UngerboeckSDKWrapper
       return invoiceTask.Result;
     }
 
+    public static UngerboeckSDKPackage.JournalEntriesModel GetJournalEntry(HttpClient USISDKClient, string astrOrgCode, int aintYear, int aintPeriod, string astrSource, string astrEntryNumber)
+    {
+      Task<UngerboeckSDKPackage.JournalEntriesModel> journalEntriesTask =
+          GetAsync<UngerboeckSDKPackage.JournalEntriesModel>(USISDKClient, $"JournalEntries/{astrOrgCode}/{aintYear}/{aintPeriod}/{astrSource}/{astrEntryNumber}");
+      return journalEntriesTask.Result;
+    }
+    [Obsolete("Use GetJournalEntry to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.JournalEntriesModel GetJournalEntries(HttpClient USISDKClient, string astrOrgCode, int aintYear, int aintPeriod, string astrSource, string astrEntryNumber)
     {
       Task<UngerboeckSDKPackage.JournalEntriesModel> journalEntriesTask =
           GetAsync<UngerboeckSDKPackage.JournalEntriesModel>(USISDKClient, $"JournalEntries/{astrOrgCode}/{aintYear}/{aintPeriod}/{astrSource}/{astrEntryNumber}");
       return journalEntriesTask.Result;
     }
+    public static UngerboeckSDKPackage.JournalEntryDetailsModel GetJournalEntryDetail(HttpClient USISDKClient, string astrOrgCode, int aintYear, int aintPeriod, string astrSource, string astrEntryNumber, int Line)
+    {
+      Task<UngerboeckSDKPackage.JournalEntryDetailsModel> journalEntryDetailTask =
+          GetAsync<UngerboeckSDKPackage.JournalEntryDetailsModel>(USISDKClient, $"JournalEntryDetails/{astrOrgCode}/{aintYear}/{aintPeriod}/{astrSource}/{astrEntryNumber}/{Line}");
+      return journalEntryDetailTask.Result;
+    }
+    [Obsolete("Use GetJournalEntryDetail to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.JournalEntryDetailsModel GetJournalEntryDetails(HttpClient USISDKClient, string astrOrgCode, int aintYear, int aintPeriod, string astrSource, string astrEntryNumber, int Line)
     {
       Task<UngerboeckSDKPackage.JournalEntryDetailsModel> journalEntryDetailTask =
           GetAsync<UngerboeckSDKPackage.JournalEntryDetailsModel>(USISDKClient, $"JournalEntryDetails/{astrOrgCode}/{aintYear}/{aintPeriod}/{astrSource}/{astrEntryNumber}/{Line}");
       return journalEntryDetailTask.Result;
     }
+    public static UngerboeckSDKPackage.MailingListsModel GetMailingList(HttpClient USISDKClient, string astrOrgCode, int aintID)
+    {
+      Task<UngerboeckSDKPackage.MailingListsModel> mailingListTask =
+          GetAsync<UngerboeckSDKPackage.MailingListsModel>(USISDKClient, $"MailingLists/{astrOrgCode}/{aintID}");
+      return mailingListTask.Result;
+    }
+    [Obsolete("Use GetMailingList to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.MailingListsModel GetMailingLists(HttpClient USISDKClient, string astrOrgCode, int aintID)
     {
       Task<UngerboeckSDKPackage.MailingListsModel> mailingListTask =
           GetAsync<UngerboeckSDKPackage.MailingListsModel>(USISDKClient, $"MailingLists/{astrOrgCode}/{aintID}");
       return mailingListTask.Result;
     }
+    public static UngerboeckSDKPackage.MarketSegmentsModel GetMarketSegment(HttpClient USISDKClient, string astrOrgCode, string astrMajor, string astrMinor)
+    {
+      Task<UngerboeckSDKPackage.MarketSegmentsModel> marketSegmentTask =
+          GetAsync<UngerboeckSDKPackage.MarketSegmentsModel>(USISDKClient, $"MarketSegments/{astrOrgCode}/{astrMajor}/{astrMinor}");
+      return marketSegmentTask.Result;
+    }
+    [Obsolete("Use GetMarketSegment to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.MarketSegmentsModel GetMarketSegments(HttpClient USISDKClient, string astrOrgCode, string astrMajor, string astrMinor)
     {
       Task<UngerboeckSDKPackage.MarketSegmentsModel> marketSegmentTask =
@@ -509,24 +671,52 @@ namespace UngerboeckSDKWrapper
           GetAsync<UngerboeckSDKPackage.MeetingFlowPatternModel>(USISDKClient, $"MeetingFlowPattern/{astrOrgCode}/{astrFlowApplicationCode}/{aintMeetingTourSequenceNbr}/{aintFlowSequenceNumber}");
       return meetingFlowPatternTask.Result;
     }
+    public static UngerboeckSDKPackage.MeetingNotesModel GetMeetingNote(HttpClient USISDKClient, string astrOrgCode, string astrBulletinApplication, int aintMeeting, int aintBulletinSeqNbr, int aintSequenceNbr)
+    {
+      Task<UngerboeckSDKPackage.MeetingNotesModel> meetingNotesTask =
+          GetAsync<UngerboeckSDKPackage.MeetingNotesModel>(USISDKClient, $"MeetingNotes/{astrOrgCode}/{astrBulletinApplication}/{aintMeeting}/{aintBulletinSeqNbr}/{aintSequenceNbr}");
+      return meetingNotesTask.Result;
+    }
+    [Obsolete("Use GetMeetingNote to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.MeetingNotesModel GetMeetingNotes(HttpClient USISDKClient, string astrOrgCode, string astrBulletinApplication, int aintMeeting, int aintBulletinSeqNbr, int aintSequenceNbr)
     {
       Task<UngerboeckSDKPackage.MeetingNotesModel> meetingNotesTask =
           GetAsync<UngerboeckSDKPackage.MeetingNotesModel>(USISDKClient, $"MeetingNotes/{astrOrgCode}/{astrBulletinApplication}/{aintMeeting}/{aintBulletinSeqNbr}/{aintSequenceNbr}");
       return meetingNotesTask.Result;
     }
+    public static UngerboeckSDKPackage.MeetingsModel GetMeeting(HttpClient USISDKClient, string astrOrgCode, int aintMeetingSequence)
+    {
+      Task<UngerboeckSDKPackage.MeetingsModel> meetingsTask =
+          GetAsync<UngerboeckSDKPackage.MeetingsModel>(USISDKClient, $"Meetings/{astrOrgCode}/{aintMeetingSequence}");
+      return meetingsTask.Result;
+    }
+    [Obsolete("Use GetMeeting to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.MeetingsModel GetMeetings(HttpClient USISDKClient, string astrOrgCode, int aintMeetingSequence)
     {
       Task<UngerboeckSDKPackage.MeetingsModel> meetingsTask =
           GetAsync<UngerboeckSDKPackage.MeetingsModel>(USISDKClient, $"Meetings/{astrOrgCode}/{aintMeetingSequence}");
       return meetingsTask.Result;
     }
+    public static UngerboeckSDKPackage.OpportunityStatusesModel GetOpportunityStatus(HttpClient USISDKClient, string astrOrgCode, string astrCode, string astrDesignation)
+    {
+      Task<UngerboeckSDKPackage.OpportunityStatusesModel> opportunityStatusTask =
+          GetAsync<UngerboeckSDKPackage.OpportunityStatusesModel>(USISDKClient, $"OpportunityStatuses/{astrOrgCode}/{astrCode}/{astrDesignation}");
+      return opportunityStatusTask.Result;
+    }
+    [Obsolete("Use GetOpportunityStatus to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.OpportunityStatusesModel GetOpportunityStatuses(HttpClient USISDKClient, string astrOrgCode, string astrCode, string astrDesignation)
     {
       Task<UngerboeckSDKPackage.OpportunityStatusesModel> opportunityStatusTask =
           GetAsync<UngerboeckSDKPackage.OpportunityStatusesModel>(USISDKClient, $"OpportunityStatuses/{astrOrgCode}/{astrCode}/{astrDesignation}");
       return opportunityStatusTask.Result;
     }
+    public static UngerboeckSDKPackage.OrderRegistrantsModel GetOrderRegistrant(HttpClient USISDKClient, string astrOrgCode, int aintRegistrantSequenceNbr)
+    {
+      Task<UngerboeckSDKPackage.OrderRegistrantsModel> orderRegistrantTask =
+          GetAsync<UngerboeckSDKPackage.OrderRegistrantsModel>(USISDKClient, $"OrderRegistrants/{astrOrgCode}/{aintRegistrantSequenceNbr}");
+      return orderRegistrantTask.Result;
+    }
+    [Obsolete("Use GetOrderRegistrant to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.OrderRegistrantsModel GetOrderRegistrants(HttpClient USISDKClient, string astrOrgCode, int aintRegistrantSequenceNbr)
     {
       Task<UngerboeckSDKPackage.OrderRegistrantsModel> orderRegistrantTask =
@@ -538,24 +728,52 @@ namespace UngerboeckSDKWrapper
       Task<UngerboeckSDKPackage.OrderRegistrantsModel> orderRegistrantTask = PutAsync(USISDKClient, $"OrderRegistrants/{orderRegistrant.OrganizationCode}/{orderRegistrant.RegistrantSequenceNbr}", orderRegistrant);
       return orderRegistrantTask.Result;
     }
+    public static UngerboeckSDKPackage.OrganizationParametersModel GetOrganizationParameter(HttpClient USISDKClient, string astrOrgCode, string astrApplicationCode, string astrParameterCode)
+    {
+      Task<UngerboeckSDKPackage.OrganizationParametersModel> orderRegistrantTask =
+          GetAsync<UngerboeckSDKPackage.OrganizationParametersModel>(USISDKClient, $"OrganizationParameters/{astrOrgCode}/{astrApplicationCode}/{astrParameterCode}");
+      return orderRegistrantTask.Result;
+    }
+    [Obsolete("Use GetOrganizationParameter to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.OrganizationParametersModel GetOrganizationParameters(HttpClient USISDKClient, string astrOrgCode, string astrApplicationCode, string astrParameterCode)
     {
       Task<UngerboeckSDKPackage.OrganizationParametersModel> orderRegistrantTask =
           GetAsync<UngerboeckSDKPackage.OrganizationParametersModel>(USISDKClient, $"OrganizationParameters/{astrOrgCode}/{astrApplicationCode}/{astrParameterCode}");
       return orderRegistrantTask.Result;
     }
-    public static UngerboeckSDKPackage.PaymentPlanDetailsModel GetPaymentPlanDetails(HttpClient USISDKClient, string astrOrgCode, int aintPayPlanID, int aintPayNumber, int aintSequence)
+    public static UngerboeckSDKPackage.PaymentPlanDetailsModel GetPaymentPlanDetail(HttpClient USISDKClient, string astrOrgCode, int aintPayPlanID, int aintPayNumber, int aintSequence)
     {
       Task<UngerboeckSDKPackage.PaymentPlanDetailsModel> paymentPlanDetailTask =
           GetAsync<UngerboeckSDKPackage.PaymentPlanDetailsModel>(USISDKClient, $"PaymentPlanDetails/{astrOrgCode}/{aintPayPlanID}/{aintPayNumber}/{aintSequence}");
       return paymentPlanDetailTask.Result;
     }
+    [Obsolete("Use GetPaymentPlanDetail to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.PaymentPlanDetailsModel GetPaymentPlanDetails(HttpClient USISDKClient, string astrOrgCode, int aintPayPlanID, int aintPayNumber, int aintSequence)
+    {
+      Task<UngerboeckSDKPackage.PaymentPlanDetailsModel> paymentPlanDetailTask =
+          GetAsync<UngerboeckSDKPackage.PaymentPlanDetailsModel>(USISDKClient, $"PaymentPlanDetails/{astrOrgCode}/{aintPayPlanID}/{aintPayNumber}/{aintSequence}");
+      return paymentPlanDetailTask.Result;
+    }    
+    public static UngerboeckSDKPackage.PaymentPlanHeadersModel GetPaymentPlanHeader(HttpClient USISDKClient, string astrOrgCode, int aintPayPlanID, int aintPayNumber)
+    {
+      Task<UngerboeckSDKPackage.PaymentPlanHeadersModel> paymentPlanHeaderTask =
+          GetAsync<UngerboeckSDKPackage.PaymentPlanHeadersModel>(USISDKClient, $"PaymentPlanHeaders/{astrOrgCode}/{aintPayPlanID}/{aintPayNumber}");
+      return paymentPlanHeaderTask.Result;
+    }
+    [Obsolete("Use GetPaymentPlanHeader to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.PaymentPlanHeadersModel GetPaymentPlanHeaders(HttpClient USISDKClient, string astrOrgCode, int aintPayPlanID, int aintPayNumber)
     {
       Task<UngerboeckSDKPackage.PaymentPlanHeadersModel> paymentPlanHeaderTask =
           GetAsync<UngerboeckSDKPackage.PaymentPlanHeadersModel>(USISDKClient, $"PaymentPlanHeaders/{astrOrgCode}/{aintPayPlanID}/{aintPayNumber}");
       return paymentPlanHeaderTask.Result;
     }
+    public static UngerboeckSDKPackage.PaymentPlansModel GetPaymentPlan(HttpClient USISDKClient, string astrOrgCode, int aintPaymentPlanID)
+    {
+      Task<UngerboeckSDKPackage.PaymentPlansModel> paymentPlanTask =
+          GetAsync<UngerboeckSDKPackage.PaymentPlansModel>(USISDKClient, $"PaymentPlans/{astrOrgCode}/{aintPaymentPlanID}");
+      return paymentPlanTask.Result;
+    }
+    [Obsolete("Use GetPaymentPlan to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.PaymentPlansModel GetPaymentPlans(HttpClient USISDKClient, string astrOrgCode, int aintPaymentPlanID)
     {
       Task<UngerboeckSDKPackage.PaymentPlansModel> paymentPlanTask =
@@ -574,12 +792,26 @@ namespace UngerboeckSDKWrapper
           GetAsync<UngerboeckSDKPackage.PriceListItemsModel>(USISDKClient, $"PriceListItems/{astrOrgCode}/{astrPriceList}/{aintSequence}");
       return priceListItemTask.Result;
     }
+    public static UngerboeckSDKPackage.PurchaseOrderItemsModel GetPurchaseOrderItem(HttpClient USISDKClient, string astrOrgCode, int aintNumber, int aintItemSequence)
+    {
+      Task<UngerboeckSDKPackage.PurchaseOrderItemsModel> purchaseOrderItemTask =
+          GetAsync<UngerboeckSDKPackage.PurchaseOrderItemsModel>(USISDKClient, $"PurchaseOrderItems/{astrOrgCode}/{aintNumber}/{aintItemSequence}");
+      return purchaseOrderItemTask.Result;
+    }
+    [Obsolete("Use GetPurchaseOrderItem to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.PurchaseOrderItemsModel GetPurchaseOrderItems(HttpClient USISDKClient, string astrOrgCode, int aintNumber, int aintItemSequence)
     {
       Task<UngerboeckSDKPackage.PurchaseOrderItemsModel> purchaseOrderItemTask =
           GetAsync<UngerboeckSDKPackage.PurchaseOrderItemsModel>(USISDKClient, $"PurchaseOrderItems/{astrOrgCode}/{aintNumber}/{aintItemSequence}");
       return purchaseOrderItemTask.Result;
     }
+    public static UngerboeckSDKPackage.PurchaseOrdersModel GetPurchaseOrder(HttpClient USISDKClient, string astrOrgCode, int aintNumber)
+    {
+      Task<UngerboeckSDKPackage.PurchaseOrdersModel> purchaseOrderTask =
+          GetAsync<UngerboeckSDKPackage.PurchaseOrdersModel>(USISDKClient, $"PurchaseOrders/{astrOrgCode}/{aintNumber}");
+      return purchaseOrderTask.Result;
+    }
+    [Obsolete("Use GetPurchaseOrder to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.PurchaseOrdersModel GetPurchaseOrders(HttpClient USISDKClient, string astrOrgCode, int aintNumber)
     {
       Task<UngerboeckSDKPackage.PurchaseOrdersModel> purchaseOrderTask =
@@ -593,13 +825,21 @@ namespace UngerboeckSDKWrapper
         return purchaseOrderTask.Result;
     }
 
-        public static UngerboeckSDKPackage.PurchaseOrderItemsModel AddPurchaseOrderItem(HttpClient USISDKClient, UngerboeckSDKPackage.PurchaseOrderItemsModel objModel)
+    public static UngerboeckSDKPackage.PurchaseOrderItemsModel AddPurchaseOrderItem(HttpClient USISDKClient, UngerboeckSDKPackage.PurchaseOrderItemsModel objModel)
         {
             Task<UngerboeckSDKPackage.PurchaseOrderItemsModel> purchaseOrderItemsTask = PostAsync(USISDKClient, "PurchaseOrderItems", objModel);
             return purchaseOrderItemsTask.Result;
         }
 
-        public static UngerboeckSDKPackage.PreferenceSettingsModel GetPreferenceSettings(HttpClient USISDKClient, string astrOrgCode, int aintID)
+    public static UngerboeckSDKPackage.PreferenceSettingsModel GetPreferenceSetting(HttpClient USISDKClient, string astrOrgCode, int aintID)
+    {
+      Task<UngerboeckSDKPackage.PreferenceSettingsModel> preferenceSettingTask =
+          GetAsync<UngerboeckSDKPackage.PreferenceSettingsModel>(USISDKClient, $"PreferenceSettings/{astrOrgCode}/{aintID}");
+      return preferenceSettingTask.Result;
+    }
+
+    [Obsolete("Use GetPreferenceSetting to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.PreferenceSettingsModel GetPreferenceSettings(HttpClient USISDKClient, string astrOrgCode, int aintID)
     {
       Task<UngerboeckSDKPackage.PreferenceSettingsModel> preferenceSettingTask =
           GetAsync<UngerboeckSDKPackage.PreferenceSettingsModel>(USISDKClient, $"PreferenceSettings/{astrOrgCode}/{aintID}");
@@ -623,13 +863,24 @@ namespace UngerboeckSDKWrapper
       HttpResponseMessage response = await USISDKClient.DeleteAsync($"{USISDKClient.BaseAddress}/api/v1/PreferenceSettings/{orgCode}/{aintID}").ConfigureAwait(false);
       APIUtil.SuccessResponse(response);
     }
-
+    public static UngerboeckSDKPackage.ProductsAndServicesModel GetProductsAndService(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.ProductsAndServicesModel> productServiceTask = GetAsync<UngerboeckSDKPackage.ProductsAndServicesModel>(USISDKClient, $"ProductsAndServices/{astrOrgCode}/{astrCode}");
+      return productServiceTask.Result;
+    }
+    [Obsolete("Use GetProductsAndService to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.ProductsAndServicesModel GetProductsAndServices(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.ProductsAndServicesModel> productServiceTask = GetAsync<UngerboeckSDKPackage.ProductsAndServicesModel>(USISDKClient, $"ProductsAndServices/{astrOrgCode}/{astrCode}");
       return productServiceTask.Result;
     }
-
+    public static UngerboeckSDKPackage.QuotesModel GetQuote(HttpClient USISDKClient, string astrOrgCode, int aintSequence)
+    {
+      Task<UngerboeckSDKPackage.QuotesModel> purchaseOrderTask =
+          GetAsync<UngerboeckSDKPackage.QuotesModel>(USISDKClient, $"Quotes/{astrOrgCode}/{aintSequence}");
+      return purchaseOrderTask.Result;
+    }
+    [Obsolete("Use GetQuote to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.QuotesModel GetQuotes(HttpClient USISDKClient, string astrOrgCode, int aintSequence)
     {
       Task<UngerboeckSDKPackage.QuotesModel> purchaseOrderTask =
@@ -691,6 +942,7 @@ namespace UngerboeckSDKWrapper
           $"{USISDKClient.BaseAddress}/api/v1/Communications/{astrOrgCode}/{astrAccountCode}/{aintSequenceNumber}").ConfigureAwait(false);
       APIUtil.SuccessResponse(response);
     }
+
     public static UngerboeckSDKPackage.EventStatusesModel GetEventStatus(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.EventStatusesModel> eventStatusTask = GetAsync<UngerboeckSDKPackage.EventStatusesModel>(USISDKClient, $"EventStatuses/{astrOrgCode}/{astrCode}");
@@ -996,6 +1248,12 @@ namespace UngerboeckSDKWrapper
           $"{USISDKClient.BaseAddress}/api/v1/Relationships/{astrOrgCode}/{astrMasterAccountCode}/{astrSubordinateAccountCode}/{astrRelationshipType}").ConfigureAwait(false);
       APIUtil.SuccessResponse(response);
     }
+    public static UngerboeckSDKPackage.RelationshipTypesModel GetRelationshipType(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.RelationshipTypesModel> relationshipTypeTask = GetAsync<UngerboeckSDKPackage.RelationshipTypesModel>(USISDKClient, $"RelationshipTypes/{astrOrgCode}/{astrCode}");
+      return relationshipTypeTask.Result;
+    }
+    [Obsolete("Use GetRelationshipType to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.RelationshipTypesModel GetRelationshipTypes(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.RelationshipTypesModel> relationshipTypeTask = GetAsync<UngerboeckSDKPackage.RelationshipTypesModel>(USISDKClient, $"RelationshipTypes/{astrOrgCode}/{astrCode}");
@@ -1061,24 +1319,52 @@ namespace UngerboeckSDKWrapper
           $"{USISDKClient.BaseAddress}/api/v1/ServiceOrders/{astrOrgCode}/{aintOrderNumber}/CompleteWorkOrders", null).ConfigureAwait(false);
       APIUtil.SuccessResponse(response);
     }
+    public static UngerboeckSDKPackage.RequisitionsModel GetRequisition(HttpClient USISDKClient, string astrOrgCode, int aintNumber)
+    {
+      Task<UngerboeckSDKPackage.RequisitionsModel> resourceTask = GetAsync<UngerboeckSDKPackage.RequisitionsModel>(USISDKClient, $"Requisitions/{astrOrgCode}/{aintNumber}");
+
+      return resourceTask.Result;
+    }
+    [Obsolete("Use GetRequisition to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.RequisitionsModel GetRequisitions(HttpClient USISDKClient, string astrOrgCode, int aintNumber)
     {
       Task<UngerboeckSDKPackage.RequisitionsModel> resourceTask = GetAsync<UngerboeckSDKPackage.RequisitionsModel>(USISDKClient, $"Requisitions/{astrOrgCode}/{aintNumber}");
 
       return resourceTask.Result;
     }
+    public static UngerboeckSDKPackage.RequisitionItemsModel GetRequisitionItem(HttpClient USISDKClient, string astrOrgCode, int aintNumber, int aintSequence)
+    {
+      Task<UngerboeckSDKPackage.RequisitionItemsModel> requisitionItemTask = GetAsync<UngerboeckSDKPackage.RequisitionItemsModel>(USISDKClient, $"RequisitionItems/{astrOrgCode}/{aintNumber}/{aintSequence}");
+
+      return requisitionItemTask.Result;
+    }
+    [Obsolete("Use GetRequisitionItem to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.RequisitionItemsModel GeRequisitionItems(HttpClient USISDKClient, string astrOrgCode, int aintNumber, int aintSequence)
     {
       Task<UngerboeckSDKPackage.RequisitionItemsModel> requisitionItemTask = GetAsync<UngerboeckSDKPackage.RequisitionItemsModel>(USISDKClient, $"RequisitionItems/{astrOrgCode}/{aintNumber}/{aintSequence}");
 
       return requisitionItemTask.Result;
     }
+    public static UngerboeckSDKPackage.ResourcesModel GetResource(HttpClient USISDKClient, string astrOrgCode, int aintSequence)
+    {
+      Task<UngerboeckSDKPackage.ResourcesModel> resourceTask = GetAsync<UngerboeckSDKPackage.ResourcesModel>(USISDKClient, $"Resources/{astrOrgCode}/{aintSequence}");
+
+      return resourceTask.Result;
+    }
+    [Obsolete("Use GetResource to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.ResourcesModel GetResources(HttpClient USISDKClient, string astrOrgCode, int aintSequence)
     {
       Task<UngerboeckSDKPackage.ResourcesModel> resourceTask = GetAsync<UngerboeckSDKPackage.ResourcesModel>(USISDKClient, $"Resources/{astrOrgCode}/{aintSequence}");
 
       return resourceTask.Result;
     }
+    public static UngerboeckSDKPackage.SpacesModel GetSpace(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.SpacesModel> spaceTask = GetAsync<UngerboeckSDKPackage.SpacesModel>(USISDKClient, $"Spaces/{astrOrgCode}/{astrCode}");
+
+      return spaceTask.Result;
+    }
+    [Obsolete("Use GetSpace to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.SpacesModel GetSpaces(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.SpacesModel> spaceTask = GetAsync<UngerboeckSDKPackage.SpacesModel>(USISDKClient, $"Spaces/{astrOrgCode}/{astrCode}");
@@ -1096,33 +1382,72 @@ namespace UngerboeckSDKWrapper
       Task<UngerboeckSDKPackage.SpacesModel> spaceTask = PutAsync(USISDKClient,$"Spaces/{space.Organization}/{space.Code}", space);
       return spaceTask.Result;
     }
+    public static UngerboeckSDKPackage.SetupsModel GetSetup(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.SetupsModel> setupTask = GetAsync<UngerboeckSDKPackage.SetupsModel>(USISDKClient, $"Setups/{astrOrgCode}/{astrCode}");
+      return setupTask.Result;
+    }
+    [Obsolete("Use GetSetup to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.SetupsModel GetSetups(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.SetupsModel> setupTask = GetAsync<UngerboeckSDKPackage.SetupsModel>(USISDKClient, $"Setups/{astrOrgCode}/{astrCode}");
       return setupTask.Result;
     }
-    public static UngerboeckSDKPackage.SpaceSetupsModel GetSpaceSetups(HttpClient USISDKClient, string astrOrgCode, string astrSpace, string astrCode)
+    public static UngerboeckSDKPackage.SpaceSetupsModel GetSpaceSetup(HttpClient USISDKClient, string astrOrgCode, string astrSpace, string astrCode)
     {
       Task<UngerboeckSDKPackage.SpaceSetupsModel> spaceSetupTask = GetAsync<UngerboeckSDKPackage.SpaceSetupsModel>(USISDKClient, $"SpaceSetups/{astrOrgCode}/{astrSpace}/{astrCode}");
       return spaceSetupTask.Result;
     }
+    [Obsolete("Use GetSpaceSetup to get a single item or GetSearchList for a list")]
+    public static UngerboeckSDKPackage.SpaceSetupsModel GetSpaceSetups(HttpClient USISDKClient, string astrOrgCode, string astrSpace, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.SpaceSetupsModel> spaceSetupTask = GetAsync<UngerboeckSDKPackage.SpaceSetupsModel>(USISDKClient, $"SpaceSetups/{astrOrgCode}/{astrSpace}/{astrCode}");
+      return spaceSetupTask.Result;
+    }    
+    public static UngerboeckSDKPackage.SpaceFeaturesModel GetSpaceFeature(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.SpaceFeaturesModel> spaceFeatureTask = GetAsync<UngerboeckSDKPackage.SpaceFeaturesModel>(USISDKClient, $"SpaceFeatures/{astrOrgCode}/{astrCode}");
+      return spaceFeatureTask.Result;
+    }
+    [Obsolete("Use GetSpaceFeature to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.SpaceFeaturesModel GetSpaceFeatures(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.SpaceFeaturesModel> spaceFeatureTask = GetAsync<UngerboeckSDKPackage.SpaceFeaturesModel>(USISDKClient, $"SpaceFeatures/{astrOrgCode}/{astrCode}");
       return spaceFeatureTask.Result;
     }
+    public static UngerboeckSDKPackage.TransactionMethodsModel GetTransactionMethod(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.TransactionMethodsModel> transactionMethodTask = GetAsync<UngerboeckSDKPackage.TransactionMethodsModel>(USISDKClient, $"TransactionMethods/{astrOrgCode}/{astrCode}");
+
+      return transactionMethodTask.Result;
+    }
+    [Obsolete("Use GetTransactionMethod to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.TransactionMethodsModel GetTransactionMethods(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
       Task<UngerboeckSDKPackage.TransactionMethodsModel> transactionMethodTask = GetAsync<UngerboeckSDKPackage.TransactionMethodsModel>(USISDKClient, $"TransactionMethods/{astrOrgCode}/{astrCode}");
 
       return transactionMethodTask.Result;
     }
+    public static UngerboeckSDKPackage.UserDefinedFieldsModel GetUserDefinedField(HttpClient USISDKClient, string astrOrgCode, string astrIssueOpportunityClass, string astrIssueOpportunityType, int aintSequenceNumber)
+    {
+      Task<UngerboeckSDKPackage.UserDefinedFieldsModel> userDefinedFieldTask = GetAsync<UngerboeckSDKPackage.UserDefinedFieldsModel>(USISDKClient, $"UserDefinedFields/{astrOrgCode}/{astrIssueOpportunityClass}/{astrIssueOpportunityType}/{aintSequenceNumber}");
+
+      return userDefinedFieldTask.Result;
+    }
+    [Obsolete("Use GetUserDefinedField to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.UserDefinedFieldsModel GetUserDefinedFields(HttpClient USISDKClient, string astrOrgCode, string astrIssueOpportunityClass, string astrIssueOpportunityType, int aintSequenceNumber)
     {
       Task<UngerboeckSDKPackage.UserDefinedFieldsModel> userDefinedFieldTask = GetAsync<UngerboeckSDKPackage.UserDefinedFieldsModel>(USISDKClient, $"UserDefinedFields/{astrOrgCode}/{astrIssueOpportunityClass}/{astrIssueOpportunityType}/{aintSequenceNumber}");
 
       return userDefinedFieldTask.Result;
     }
+    public static UngerboeckSDKPackage.ValidationEntriesModel GetValidationEntry(HttpClient USISDKClient, string astrOrgCode, int aintValidationTableID, int aintSequenceNumber)
+    {
+      Task<UngerboeckSDKPackage.ValidationEntriesModel> validationEntryTask = GetAsync<UngerboeckSDKPackage.ValidationEntriesModel>(USISDKClient, $"ValidationEntries/{astrOrgCode}/{aintValidationTableID}/{aintSequenceNumber}");
+
+      return validationEntryTask.Result;
+    }
+    [Obsolete("Use GetValidationEntry to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.ValidationEntriesModel GetValidationEntries(HttpClient USISDKClient, string astrOrgCode, int aintValidationTableID, int aintSequenceNumber)
     {
       Task<UngerboeckSDKPackage.ValidationEntriesModel> validationEntryTask = GetAsync<UngerboeckSDKPackage.ValidationEntriesModel>(USISDKClient, $"ValidationEntries/{astrOrgCode}/{aintValidationTableID}/{aintSequenceNumber}");
@@ -1135,13 +1460,25 @@ namespace UngerboeckSDKWrapper
 
       return workOrderTask.Result;
     }
-
+    public static UngerboeckSDKPackage.WorkOrderItemsModel GetWorkOrderItem(HttpClient USISDKClient, string astrOrgCode, int aintOrderNbr, int aintOrderLineNbr)
+    {
+      Task<UngerboeckSDKPackage.WorkOrderItemsModel> workOrderItemTask =
+          GetAsync<UngerboeckSDKPackage.WorkOrderItemsModel>(USISDKClient, $"WorkOrderItems/{astrOrgCode}/{aintOrderNbr}/{aintOrderLineNbr}");
+      return workOrderItemTask.Result;
+    }
+    [Obsolete("Use GetWorkOrderItem to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.WorkOrderItemsModel GetWorkOrderItems(HttpClient USISDKClient, string astrOrgCode, int aintOrderNbr, int aintOrderLineNbr)
     {
       Task<UngerboeckSDKPackage.WorkOrderItemsModel> workOrderItemTask =
           GetAsync<UngerboeckSDKPackage.WorkOrderItemsModel>(USISDKClient, $"WorkOrderItems/{astrOrgCode}/{aintOrderNbr}/{aintOrderLineNbr}");
       return workOrderItemTask.Result;
     }
+    public static UngerboeckSDKPackage.WebhooksModel GetWebHook(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber)
+    {
+      Task<UngerboeckSDKPackage.WebhooksModel> webHookTask = GetAsync<UngerboeckSDKPackage.WebhooksModel>(USISDKClient, $"Webhooks/{astrOrgCode}/{aintSequenceNumber}");
+      return webHookTask.Result;
+    }
+    [Obsolete("Use GetWebHook to get a single item or GetSearchList for a list")]
     public static UngerboeckSDKPackage.WebhooksModel GetWebHooks(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber)
     {
       Task<UngerboeckSDKPackage.WebhooksModel> webHookTask = GetAsync<UngerboeckSDKPackage.WebhooksModel>(USISDKClient, $"Webhooks/{astrOrgCode}/{aintSequenceNumber}");

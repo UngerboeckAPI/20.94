@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public TransactionMethodsModel Get(string orgCode, string code)
     {
-      return APIUtil.GetTransactionMethods(USISDKClient, orgCode, code);
+      return APIUtil.GetTransactionMethod(USISDKClient, orgCode, code);
     }
 
     /// <summary>

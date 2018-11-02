@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public SpaceSetupsModel Get(string orgCode, string space, string code)
     {
-      return APIUtil.GetSpaceSetups(USISDKClient, orgCode, space, code);
+      return APIUtil.GetSpaceSetup(USISDKClient, orgCode, space, code);
     }
 
     /// <summary>

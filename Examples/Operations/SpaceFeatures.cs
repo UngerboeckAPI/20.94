@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public SpaceFeaturesModel Get(string orgCode, string code)
     {
-      return APIUtil.GetSpaceFeatures(USISDKClient, orgCode, code);
+      return APIUtil.GetSpaceFeature(USISDKClient, orgCode, code);
     }
 
     /// <summary>

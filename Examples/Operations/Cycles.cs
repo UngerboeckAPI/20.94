@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary> 
     public CyclesModel Get(string orgCode, string code)
     {
-      return APIUtil.GetCycles(USISDKClient, orgCode, code);
+      return APIUtil.GetCycle(USISDKClient, orgCode, code);
     }
 
     /// <summary>

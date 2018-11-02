@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public PaymentPlanDetailsModel Get(string orgCode, int payPlanID, int payNumber, int sequence)
     {
-      return APIUtil.GetPaymentPlanDetails(USISDKClient, orgCode, payPlanID, payNumber, sequence);
+      return APIUtil.GetPaymentPlanDetail(USISDKClient, orgCode, payPlanID, payNumber, sequence);
     }
 
     /// <summary>

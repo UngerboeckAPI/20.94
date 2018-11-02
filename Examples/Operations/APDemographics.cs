@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>  
     public APDemographicsModel Get(string orgCode, string supplier)
     {
-      return APIUtil.GetAPDemographics(USISDKClient, orgCode, supplier);
+      return APIUtil.GetAPDemographic(USISDKClient, orgCode, supplier);
     }
 
     /// <summary>

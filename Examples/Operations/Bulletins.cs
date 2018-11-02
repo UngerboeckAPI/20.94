@@ -16,7 +16,7 @@ namespace Examples.Operations
     /// </summary>
     public BulletinsModel Get(string orgCode, string bulletinApplication, int meeting, int bulletin)
     {
-      return APIUtil.GetBulletins(USISDKClient, orgCode, bulletinApplication, meeting, bulletin);
+      return APIUtil.GetBulletin(USISDKClient, orgCode, bulletinApplication, meeting, bulletin);
     }
 
     /// <summary>
