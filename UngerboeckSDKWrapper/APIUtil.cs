@@ -441,6 +441,13 @@ namespace UngerboeckSDKWrapper
     {      
       return GetCampaign(USISDKClient, astrOrgCode, astrID, astrDesignation);
     }
+
+    public static UngerboeckSDKPackage.CampaignDetailsModel GetCampaignDetail(HttpClient USISDKClient, string astrOrgCode, string astrCampaignDesignation, string astrCampaign, int aintSequenceNumber)
+    {
+      Task<UngerboeckSDKPackage.CampaignDetailsModel> campaignDetailsTask =
+          GetAsync<UngerboeckSDKPackage.CampaignDetailsModel>(USISDKClient, $"CampaignDetails/{astrOrgCode}/{astrCampaignDesignation}/{astrCampaign}/{aintSequenceNumber}");
+      return campaignDetailsTask.Result;
+    }
     public static UngerboeckSDKPackage.ConcessionsModel GetConcession(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber)
     {
       Task<UngerboeckSDKPackage.ConcessionsModel> concessionTask =
@@ -1504,6 +1511,34 @@ namespace UngerboeckSDKWrapper
         return ungerboeckAuthenticationCheck;
       }
     }
+
+    /// <summary>
+    /// Gets the report parameters for the report being run.
+    /// </summary>
+    /// <param name="USISDKClient">The SDK Client</param>
+    /// <param name="astrOrgCode">Org Code to run the report against</param>
+    /// <param name="aintSequenceNumber">Report Master Sequence</param>
+    /// <returns></returns>
+    public static ParametersModel GetReportParameters(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber)
+    {
+      Task<ParametersModel> reportsTask = GetAsync<ParametersModel>(USISDKClient, $"Reports/{astrOrgCode}/{aintSequenceNumber}/GetParameters");
+      return reportsTask.Result;
+    }
+
+    /// <summary>
+    /// Runs the report with the request passed in
+    /// </summary>
+    /// <param name="USISDKClient">The SDK Client</param>
+    /// <param name="astrOrgCode">Org Code to run the report against</param>
+    /// <param name="aintSequenceNumber">Report Master Sequence</param>
+    /// <param name="reportRequestModel">Request Object with Settings and Parameters</param>
+    /// <returns></returns>
+    public static ReportResponseModel RunReport(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber, ReportRequestModel reportRequestModel)
+    {
+      Task<ReportResponseModel> ReportRequestModelTask = PutAsyncBulk<ReportResponseModel, ReportRequestModel>(USISDKClient, $"Reports/{astrOrgCode}/{aintSequenceNumber}/RunReport", reportRequestModel);
+      return ReportRequestModelTask.Result;
+    }
+
 
     private static bool RequestFailed(HttpResponseMessage response)
     {
