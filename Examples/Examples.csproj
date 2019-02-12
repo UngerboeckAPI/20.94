@@ -66,6 +66,7 @@
     <Compile Include="Operations\Booths.cs" />
     <Compile Include="Operations\BulletinApproval.cs" />
     <Compile Include="Operations\Bulletins.cs" />
+    <Compile Include="Operations\CampaignDetails.cs" />
     <Compile Include="Operations\Campaigns.cs" />
     <Compile Include="Operations\Communications.cs" />
     <Compile Include="Operations\Concessions.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Operations\RegistrationOrders.cs" />
     <Compile Include="Operations\Relationships.cs" />
     <Compile Include="Operations\RelationshipTypes.cs" />
+    <Compile Include="Operations\Reports.cs" />
     <Compile Include="Operations\RequisitionApproval.cs" />
     <Compile Include="Operations\RequisitionItems.cs" />
     <Compile Include="Operations\Requisitions.cs" />

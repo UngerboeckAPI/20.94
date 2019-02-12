@@ -413,6 +413,25 @@ namespace UngerboeckSDKWrapper
     {
       return GetBooth(USISDKClient, astrOrgCode, aintSequenceNumber);
     }
+
+    public static UngerboeckSDKPackage.BoothsModel AddBooth(HttpClient USISDKClient, UngerboeckSDKPackage.BoothsModel booth) {
+      Task<UngerboeckSDKPackage.BoothsModel> BoothTask = PostAsync(USISDKClient, $"Booths/{booth.OrganizationCode}/{booth.SequenceNumber}", booth);
+      return BoothTask.Result;
+    }
+
+    public static UngerboeckSDKPackage.BoothsModel UpdateBooth(HttpClient USISDKClient, UngerboeckSDKPackage.BoothsModel booth) {
+      Task<UngerboeckSDKPackage.BoothsModel> BoothTask = PutAsync(USISDKClient, $"Booths/{booth.OrganizationCode}/{booth.SequenceNumber}", booth);
+      return BoothTask.Result;
+    }
+
+    public static async Task AwaitDeleteBooth(HttpClient USISDKClient, string orgCode, int seqNumber) {
+      HttpResponseMessage response = await USISDKClient.DeleteAsync(
+          $"{USISDKClient.BaseAddress}/api/v1/Booths/{orgCode}/{seqNumber}"
+        ).ConfigureAwait(false);
+
+      SuccessResponse(response);
+    }
+
     public static UngerboeckSDKPackage.BulletinApprovalModel GetBulletinApproval(HttpClient USISDKClient, string astrOrgCode, int aintMeetingSequenceNumber, int aintBulletinSequenceNumber, int aintSequenceNumber, string astrBulletinFileID)
     {
       Task<UngerboeckSDKPackage.BulletinApprovalModel> bulletinApprovalTask =
@@ -980,6 +999,14 @@ namespace UngerboeckSDKWrapper
       Task<UngerboeckSDKPackage.EventProductsAndServicesModel> eventProductAndServiceTask = GetAsync<UngerboeckSDKPackage.EventProductsAndServicesModel>(USISDKClient, $"EventProductsAndServices/{astrOrgCode}/{aintSequenceNumber}");
       return eventProductAndServiceTask.Result;
     }
+    public static EventProductsAndServicesModel AddEventProductService(HttpClient USISDKClient, EventProductsAndServicesModel product) {
+      Task<EventProductsAndServicesModel> eventProductAndServiceTask = PostAsync(USISDKClient, $"EventProductsAndServices/{product.OrganizationCode}/{product.SequenceNumber}", product);
+      return eventProductAndServiceTask.Result;
+    }
+    public static EventProductsAndServicesModel UpdateEventProductService(HttpClient USISDKClient, EventProductsAndServicesModel product) {
+      Task<EventProductsAndServicesModel> eventProductAndServiceTask = PutAsync(USISDKClient, $"EventProductsAndServices/{product.OrganizationCode}/{product.SequenceNumber}", product);
+      return eventProductAndServiceTask.Result;
+    }
     public static UngerboeckSDKPackage.DocumentsModel GetDocument(HttpClient USISDKClient, string astrOrgCode, string astrType, int aintSequenceNumber)
     {
       Task<UngerboeckSDKPackage.DocumentsModel> documentTask = GetAsync<UngerboeckSDKPackage.DocumentsModel>(USISDKClient,
@@ -1027,6 +1054,24 @@ namespace UngerboeckSDKWrapper
     {
       Task<UngerboeckSDKPackage.EventsModel> eventTask = PutAsync(USISDKClient, $"Events/{@event.Organization}/{@event.EventID}", @event);
       return eventTask.Result;
+    }
+
+    public static UngerboeckSDKPackage.ExhibitorsModel GetExhibitor(HttpClient USISDKClient, string astrOrgCode, int aintExhibitorID)
+    {
+      Task<UngerboeckSDKPackage.ExhibitorsModel> ExhibitorTask = GetAsync<UngerboeckSDKPackage.ExhibitorsModel>(USISDKClient,
+          $"Exhibitors/{astrOrgCode}/{aintExhibitorID}");
+      return ExhibitorTask.Result;
+    }
+    public static UngerboeckSDKPackage.ExhibitorsModel AddExhibitor(HttpClient USISDKClient, UngerboeckSDKPackage.ExhibitorsModel exhibitor)
+    {
+      Task<UngerboeckSDKPackage.ExhibitorsModel> ExhibitorTask = PostAsync(USISDKClient, "Exhibitors", exhibitor);
+      return ExhibitorTask.Result;
+    }
+
+    public static UngerboeckSDKPackage.ExhibitorsModel UpdateExhibitor(HttpClient USISDKClient, UngerboeckSDKPackage.ExhibitorsModel exhibitor)
+    {
+      Task<UngerboeckSDKPackage.ExhibitorsModel> ExhibitorTask = PutAsync(USISDKClient, $"Exhibitors/{exhibitor.OrganizationCode}/{exhibitor.ExhibitorID}", exhibitor);
+      return ExhibitorTask.Result;
     }
 
     public static UngerboeckSDKPackage.OpportunitiesModel GetOpportunity(HttpClient USISDKClient, string astrOrgCode, string astrAccountCode, int aintSequenceNumber)
@@ -1116,6 +1161,12 @@ namespace UngerboeckSDKWrapper
     {
       Task<UngerboeckSDKPackage.RegistrationOrdersModel> registrationOrderTask = PutAsync(USISDKClient,
               $"RegistrationOrders/{registrationOrder.OrganizationCode}/{registrationOrder.OrderNumber}", registrationOrder);
+      return registrationOrderTask.Result;
+    }
+
+    public static UngerboeckSDKPackage.RegistrationOrdersModel CalculateTaxesRegistrationOrder(HttpClient USISDKClient, UngerboeckSDKPackage.RegistrationOrdersModel registrationOrder)
+    {
+      Task<UngerboeckSDKPackage.RegistrationOrdersModel> registrationOrderTask = PostAsync(USISDKClient, "RegistrationOrders/CalculateTaxes", registrationOrder);
       return registrationOrderTask.Result;
     }
 
