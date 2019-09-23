@@ -78,6 +78,42 @@ namespace Examples.Operations
     }
 
     /// <summary>
+    /// This method demonstrates searching for empty values or finding all entries that aren't empty
+    /// </summary>
+    public IEnumerable<AllAccountsModel> SearchingForNull(string OrgCode)
+    {
+      //For more info on searching in the Ungerboeck API, see this article:
+      //https://supportcenter.ungerboeck.com/hc/en-us/articles/115010610608-Searching-Using-the-API
+
+      SearchMetadataModel searchMetadata = null;
+      IEnumerable<AllAccountsModel> accountsList;
+
+      //Here's examples of searches using OData.
+
+      //Get all accounts with certain first name and has an empty SynchronizedOrganization property
+      accountsList = APIUtil.GetSearchList<AllAccountsModel>(USISDKClient, ref searchMetadata, OrgCode, "startswith('Jones', FirstName) and LegalName eq null");
+
+      return accountsList;
+    }
+
+    /// <summary>
+    /// This method demonstrates searching for empty values or finding all entries that aren't empty
+    /// </summary>
+    public IEnumerable<AllAccountsModel> SearchingForNotNull(string OrgCode)
+    {
+      //For more info on searching in the Ungerboeck API, see this article:
+      //https://supportcenter.ungerboeck.com/hc/en-us/articles/115010610608-Searching-Using-the-API
+
+      SearchMetadataModel searchMetadata = null;
+      IEnumerable<AllAccountsModel> accountsList;
+
+      //Get all accounts with certain first name and has a filled SynchronizedOrganization property
+      accountsList = APIUtil.GetSearchList<AllAccountsModel>(USISDKClient, ref searchMetadata, OrgCode, "startswith('Jones', FirstName) and LegalName ne null");
+
+      return accountsList;
+    }
+
+    /// <summary>
     /// This method demonstrates searching in the API and retrieving specific properties using the Select parameter.
     /// </summary>
     public IEnumerable<object> SearchingForSpecificPropertiesWithSelect(string OrgCode)

@@ -37,8 +37,8 @@ namespace Examples.Operations
     /// <param name="issueClass">Set this to the designation of the opportunity.  You can use USISDKConstants.AccountDesignations to help you.  Example value is UngerboeckSDKPackage.USISDKConstants.AccountDesignations.EventSales</param>
     /// <param name="issueType">Set the opportunity type using the type code.  Which User Defined Fields you use is dependent on this.</param>
     /// <param name="status">This should be set to a code value found in the opportunity statuses window.  Example value is "A"</param>    
-    /// <param name="userNumber01Value">In this example, we will set User Number 01, but you can fill any user field on your Issue Type.</param>
-    public OpportunitiesModel Add(string orgCode, string description, string accountCode, string issueClass, string issueType, string status, int userNumber01Value)
+    /// <param name="userNumber03Value">In this example, we will set User Number 03, but you can fill any user field on your Issue Type.</param>
+    public OpportunitiesModel Add(string orgCode, string description, string accountCode, string issueClass, string issueType, string status, int userNumber03Value)
     {
       var myOpportunity = new OpportunitiesModel
       {
@@ -48,7 +48,7 @@ namespace Examples.Operations
         Status = status, 
         Class = issueClass,
         Type = issueType,
-        UserNumber01 = userNumber01Value
+        UserNumber03 = userNumber03Value
 
         //Contact = "00111111"  'Set this to the account code of the opportunity contact if you wish for it to attach to that contact
         //Salesperson = "ALB" 'Enter in the account code of the salesperson if you wish to set this

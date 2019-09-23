@@ -2,6 +2,7 @@
 using UngerboeckSDKWrapper;
 using UngerboeckSDKPackage;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Examples.Operations
 {
@@ -53,7 +54,7 @@ namespace Examples.Operations
 
       return APIUtil.AddServiceOrder(USISDKClient, myServiceOrder);
     }
-
+    
     /// <summary>
     /// A basic add example
     /// </summary>
@@ -190,5 +191,129 @@ namespace Examples.Operations
     {
       APIUtil.AwaitCompleteWorkOrders(USISDKClient, orgCode, orderNumber).Wait();
     }
+
+    #region "Booth Orders"
+
+    /// <summary>
+    /// This method will retrieve the booth order for the specified exhibitor, if one exists
+    /// </summary>
+    /// <param name="orgCode">Organization code</param>
+    /// <param name="Event">The event ID of the event attached to the order</param>
+    /// <param name="exhibitor">This is the exhibitorID of the exhibitor attached to the order</param>
+    public ServiceOrdersModel GetExhibitorBoothOrder(string orgCode, int Event, int exhibitor)
+    {
+      SearchMetadataModel searchMetadata = null;
+      return APIUtil.GetSearchList<ServiceOrdersModel>(USISDKClient, ref searchMetadata, orgCode, $"Event eq {Event} and Exhibitor eq {exhibitor} and BoothOrder eq 'Y'").FirstOrDefault();
+    }
+
+    /// <summary>
+    /// Adds a booth order to the specified exhibitor. Optionally takes a paramater for booth to assign the exhibitor at the same time.
+    /// </summary>
+    /// <param name="orgCode">Organization code</param>
+    /// <param name="Event">The event ID of the event attached to the order</param>
+    /// <param name="orderStatus">This is the user-configurable status code on the order</param>
+    /// <param name="accountCode">This should be a single account code</param>
+    /// <param name="exhibitor">The exhibitorID to add this order to</param>
+    /// <param name="function">The event ID of the event attached to the order. Must be of type </param>
+    /// <param name="billToAccount"></param>
+    /// <param name="priceList">The price list code. You can find this on the Price List window in Ungerboeck under the "Code" field (Database column CC715_PRICE_LIST).</param>    
+    /// <param name="booth">This is a comma seperated list of booths to assign to this order</param>
+    public ServiceOrdersModel AddBoothOrderToExhibitor(string orgCode, int Event, string orderStatus, string accountCode, int exhibitor, int function, string billToAccount, string priceList, string booth = "")
+    {
+      var exhibitorBoothOrder = new ServiceOrdersModel
+      {
+        OrganizationCode = orgCode,
+        Event = Event,
+        OrderStatus = orderStatus,
+        Account = accountCode,
+        Function = function,
+        BillToAccount = billToAccount,
+        PriceList = priceList,
+        Exhibitor = exhibitor,
+        BoothOrder = "Y",
+        BoothNumber = booth
+      };
+
+      return APIUtil.AddServiceOrder(USISDKClient, exhibitorBoothOrder);
+    }
+
+    /// <summary>
+    /// This method is used to place an exhibitor in a booth. It will attempt to retrieve the exhibitors booth order first. If that exists, than it will add the booth to the 
+    /// existing order and return the order. If it does not find a booth order, it will return null.
+    /// </summary>
+    /// <param name="orgCode">Organization code</param>
+    /// <param name="Event">The event ID of the event attached to the order</param>
+    /// <param name="exhibitor">The exhibitorID to add this order to</param>
+    /// <param name="booth">This is a comma seperated list of booths to assign to this order</param>
+    public ServiceOrdersModel PlaceExhibitorInBooth(string orgCode, int Event, int exhibitor, string booth)
+    {
+      ServiceOrdersModel exhibitorBoothOrder = null;
+
+      //Retrieve the existing booth order, an exhibitor will only have 1
+      exhibitorBoothOrder = GetExhibitorBoothOrder(orgCode, Event, exhibitor);
+
+      if(exhibitorBoothOrder != null)
+      {
+        // A booth order can have multiple booths, this example just appends the new booth to the existing list if needed 
+        if(exhibitorBoothOrder.BoothNumber != null && exhibitorBoothOrder.BoothNumber.Length > 0)
+        {
+          exhibitorBoothOrder.BoothNumber = exhibitorBoothOrder.BoothNumber + "," + booth;
+        }
+        else
+        {
+          exhibitorBoothOrder.BoothNumber = booth;
+        }
+
+        exhibitorBoothOrder = APIUtil.UpdateServiceOrder(USISDKClient, exhibitorBoothOrder);
+      }
+      else
+      {
+        // Here we could create a new booth order, defaulting in values if desired. This example will simply fail to assign the exhibitor if no booth order exists
+        // exhibitorBoothOrder = APIUtil.AddBoothOrderToExhibitor(USISDKClient, orgCode, Event, orderStatus, accountCode, exhibitor, function, billToAccount, priceList, booth);
+      }
+
+      return exhibitorBoothOrder;
+    }
+
+    /// <summary>
+    /// This method is used to create an order, exhibitor, and assign a booth at the same time. This a process used for venues and is similar to the process ESC does. It does not rely on the exhibitor 
+    /// record explicitly. It will create an Exhibitor record if one is not provided, as well as create a booth record if it does not match an existing one.
+    /// </summary>
+    /// <param name="orgCode">Organization code</param>
+    /// <param name="Event">The event ID of the event attached to the order</param>
+    /// <param name="orderStatus">This is the user-configurable status code on the order</param>
+    /// <param name="accountCode">This should be a single account code</param>
+    /// <param name="function">The event ID of the event attached to the order. Must be of type </param>
+    /// <param name="billToAccount"></param>
+    /// <param name="priceList">The price list code. You can find this on the Price List window in Ungerboeck under the "Code" field (Database column CC715_PRICE_LIST).</param>    
+    /// <param name="booth">This is a comma seperated list of booths to assign to this order</param>
+    /// <param name="exhibitor">The exhibitorID to add this order to. This is optional and will be used if specified, otherwise we will find an existing exhibitor on the event if they exist,
+    ///   or add a new one otherwise</param>
+    public ServiceOrdersModel AddOrderWithBooth(string orgCode, int Event, string orderStatus, string accountCode, int function, string billToAccount, string priceList, string booth, int exhibitor = 0)
+    {
+      var myServiceOrder = new ServiceOrdersModel
+      {
+        OrganizationCode = orgCode,
+        Event = Event,
+        OrderStatus = orderStatus,
+        Account = accountCode,
+        Function = function,
+        BillToAccount = billToAccount,
+        PriceList = priceList,
+        BoothNumber = booth,
+        Exhibitor = exhibitor,
+      };
+
+      if (!string.IsNullOrEmpty(booth))
+      {
+        // Adding a booth will flag the order as a booth order automatically, but we will be explicit
+        myServiceOrder.BoothOrder = "Y";
+      }
+
+      return APIUtil.AddServiceOrder(USISDKClient, myServiceOrder);
+    }
+
+    #endregion
+
   }
 }

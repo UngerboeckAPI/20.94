@@ -181,6 +181,17 @@ namespace UngerboeckSDKWrapper
       return default(T);
     }
 
+    private static async Task<K> PostAsync<T, K>(HttpClient USISDKClient, string URL, T item)
+    {
+      var response = await USISDKClient.PostAsJsonAsync($"{USISDKClient.BaseAddress}/api/v1/{URL}", item).ConfigureAwait(false);
+      if (SuccessResponse(response))
+      {
+        return await response.Content.ReadAsAsync<K>();
+      }
+
+      return default(K);
+    }
+
     private static async Task<T> PutAsync<T>(HttpClient USISDKClient, string URL, T item)
     {
       HttpResponseMessage response = await USISDKClient.PutAsJsonAsync($"{USISDKClient.BaseAddress}/api/v1/{URL}", item).ConfigureAwait(false);
@@ -193,9 +204,34 @@ namespace UngerboeckSDKWrapper
       return default(T);
     }
 
+    private static async Task<K> PutAsync<T, K>(HttpClient USISDKClient, string URL, T item)
+    {
+      HttpResponseMessage response = await USISDKClient.PutAsJsonAsync($"{USISDKClient.BaseAddress}/api/v1/{URL}", item).ConfigureAwait(false);
+      if (APIUtil.SuccessResponse(response))
+      {
+        var updatedModel = await response.Content.ReadAsAsync<K>();
+        return updatedModel;
+      }
+
+      return default(K);
+    }
+
+
     private static async Task<T> PutAsyncBulk<T, U>(HttpClient USISDKClient, string URL, U item)
     {
       HttpResponseMessage response = await USISDKClient.PutAsJsonAsync($"{USISDKClient.BaseAddress}/api/v1/{URL}", item).ConfigureAwait(false);
+      if (APIUtil.SuccessResponse(response))
+      {
+        var updatedModel = await response.Content.ReadAsAsync<T>();
+        return updatedModel;
+      }
+
+      return default(T);
+    }
+
+    private static async Task<T> DeleteAsync<T>(HttpClient USISDKClient, string URL)
+    {
+      HttpResponseMessage response = await USISDKClient.DeleteAsync($"{USISDKClient.BaseAddress}/api/v1/{URL}").ConfigureAwait(false);
       if (APIUtil.SuccessResponse(response))
       {
         var updatedModel = await response.Content.ReadAsAsync<T>();
@@ -495,8 +531,15 @@ namespace UngerboeckSDKWrapper
     }
     public static UngerboeckSDKPackage.CountriesModel GetCountry(HttpClient USISDKClient, string astrOrgCode, string astrCode)
     {
-      Task<UngerboeckSDKPackage.CountriesModel> countryTask =
-          GetAsync<UngerboeckSDKPackage.CountriesModel>(USISDKClient, $"Countries/{astrOrgCode}/{astrCode}");
+      Task<UngerboeckSDKPackage.CountriesModel> countryTask;
+      if (astrCode == "***"){
+        //Due to HTTP URL security, '*' is not allowed in base URLs, but can be put in query strings.  This does not change the call response at all.
+        countryTask = GetAsync<UngerboeckSDKPackage.CountriesModel>(USISDKClient, $"Countries/{astrOrgCode}?code=***");
+      }
+          else{
+        countryTask = GetAsync<UngerboeckSDKPackage.CountriesModel>(USISDKClient, $"Countries/{astrOrgCode}/{astrCode}");
+      }
+      
       return countryTask.Result;
     }
     [Obsolete("Use GetCountry to get a single item or GetSearchList for a list")]
@@ -665,7 +708,34 @@ namespace UngerboeckSDKWrapper
           GetAsync<UngerboeckSDKPackage.JournalEntryDetailsModel>(USISDKClient, $"JournalEntryDetails/{astrOrgCode}/{aintYear}/{aintPeriod}/{astrSource}/{astrEntryNumber}/{Line}");
       return journalEntryDetailTask.Result;
     }
-    public static UngerboeckSDKPackage.MailingListsModel GetMailingList(HttpClient USISDKClient, string astrOrgCode, int aintID)
+
+        public static UngerboeckSDKPackage.JournalEntryDetailsModel AddJournalEntryDetail(HttpClient USISDKClient, UngerboeckSDKPackage.JournalEntryDetailsModel objModel)
+        {
+            Task<UngerboeckSDKPackage.JournalEntryDetailsModel> journalEntryDetailTask = PostAsync(USISDKClient, "JournalEntryDetails", objModel);
+            return journalEntryDetailTask.Result;
+        }
+
+        public static UngerboeckSDKPackage.JournalEntryDetailsModel UpdateJouralEntryDetail(HttpClient USISDKClient, UngerboeckSDKPackage.JournalEntryDetailsModel journalEntryDetail)
+        {
+            Task<UngerboeckSDKPackage.JournalEntryDetailsModel> journalEntryDetailsTask = PutAsync(USISDKClient,
+                $"JournalEntryDetails/{journalEntryDetail.Organization}/{journalEntryDetail.Year}/{journalEntryDetail.Period}/{journalEntryDetail.Source}/{journalEntryDetail.EntryNumber}/{journalEntryDetail.Line}", journalEntryDetail);
+            return journalEntryDetailsTask.Result;
+        }
+
+        public static UngerboeckSDKPackage.JournalEntriesModel AddJournalEntry(HttpClient USISDKClient, UngerboeckSDKPackage.JournalEntriesModel objModel)
+        {
+            Task<UngerboeckSDKPackage.JournalEntriesModel> journalEntryTask = PostAsync(USISDKClient, "JournalEntries", objModel);
+            return journalEntryTask.Result;
+        }
+
+        public static UngerboeckSDKPackage.JournalEntriesModel UpdateJouralEntry(HttpClient USISDKClient, UngerboeckSDKPackage.JournalEntriesModel journalEntry)
+        {
+            Task<UngerboeckSDKPackage.JournalEntriesModel> journalEntryTask = PutAsync(USISDKClient,
+                $"JournalEntries/{journalEntry.Organization}/{journalEntry.Year}/{journalEntry.Period}/{journalEntry.Source}/{journalEntry.EntryNumber}", journalEntry);
+            return journalEntryTask.Result;
+        }
+
+        public static UngerboeckSDKPackage.MailingListsModel GetMailingList(HttpClient USISDKClient, string astrOrgCode, int aintID)
     {
       Task<UngerboeckSDKPackage.MailingListsModel> mailingListTask =
           GetAsync<UngerboeckSDKPackage.MailingListsModel>(USISDKClient, $"MailingLists/{astrOrgCode}/{aintID}");
@@ -754,6 +824,20 @@ namespace UngerboeckSDKWrapper
       Task<UngerboeckSDKPackage.OrderRegistrantsModel> orderRegistrantTask = PutAsync(USISDKClient, $"OrderRegistrants/{orderRegistrant.OrganizationCode}/{orderRegistrant.RegistrantSequenceNbr}", orderRegistrant);
       return orderRegistrantTask.Result;
     }
+    public static async Task AwaitSetRegistrantApproval(HttpClient USISDKClient, UngerboeckSDKPackage.RegistrationApprovalsModel orderRegistrantApproval)
+    {
+      HttpResponseMessage response = await USISDKClient.PutAsJsonAsync(
+         $"{USISDKClient.BaseAddress}/api/v1/OrderRegistrants/{orderRegistrantApproval.OrganizationCode}/{orderRegistrantApproval.RegistrantSequenceNbr}/SetRegistrantApproval", orderRegistrantApproval).ConfigureAwait(false);
+      APIUtil.SuccessResponse(response);      
+    }
+
+    public static HttpResponseMessage SetRegistrantApproval(HttpClient USISDKClient, UngerboeckSDKPackage.RegistrationApprovalsModel orderRegistrantApproval)
+    {
+      Task<HttpResponseMessage> response = USISDKClient.PutAsJsonAsync($"{USISDKClient.BaseAddress}/api/v1/OrderRegistrants/{orderRegistrantApproval.OrganizationCode}/{orderRegistrantApproval.RegistrantSequenceNbr}/SetRegistrantApproval", orderRegistrantApproval);
+
+      return response.Result;
+    }
+
     public static UngerboeckSDKPackage.OrganizationParametersModel GetOrganizationParameter(HttpClient USISDKClient, string astrOrgCode, string astrApplicationCode, string astrParameterCode)
     {
       Task<UngerboeckSDKPackage.OrganizationParametersModel> orderRegistrantTask =
@@ -818,7 +902,31 @@ namespace UngerboeckSDKWrapper
           GetAsync<UngerboeckSDKPackage.PriceListItemsModel>(USISDKClient, $"PriceListItems/{astrOrgCode}/{astrPriceList}/{aintSequence}");
       return priceListItemTask.Result;
     }
-    public static UngerboeckSDKPackage.PurchaseOrderItemsModel GetPurchaseOrderItem(HttpClient USISDKClient, string astrOrgCode, int aintNumber, int aintItemSequence)
+
+    public static UngerboeckSDKPackage.InventoryItemsModel GetInventoryItems(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.InventoryItemsModel> inventoryItems =
+          GetAsync<UngerboeckSDKPackage.InventoryItemsModel>(USISDKClient, $"InventoryItems/{astrOrgCode}/{astrCode}");
+      return inventoryItems.Result;
+    }
+
+
+    public static UngerboeckSDKPackage.InventoryStatsModel GetInventoryStats(HttpClient USISDKClient, string astrOrgCode, string astrItem, string astrSpace, string astrLotSerialNumber)
+    {
+      Task<UngerboeckSDKPackage.InventoryStatsModel> inventoryStats =
+          GetAsync<UngerboeckSDKPackage.InventoryStatsModel>(USISDKClient, $"InventoryStats/{astrOrgCode}/{astrItem}/{astrSpace}/{astrLotSerialNumber}");
+      return inventoryStats.Result;
+    }
+
+    public static UngerboeckSDKPackage.InventorySuppliersModel GetPriceListItem(HttpClient USISDKClient, string astrOrgCode, string astrInventoryItem, string astrSupplier)
+		{
+			Task<UngerboeckSDKPackage.InventorySuppliersModel> inventorySuppliers =
+					GetAsync<UngerboeckSDKPackage.InventorySuppliersModel>(USISDKClient, $"InventorySuppliers/{astrOrgCode}/{astrInventoryItem}/{astrSupplier}");
+			return inventorySuppliers.Result;
+		}
+
+
+		public static UngerboeckSDKPackage.PurchaseOrderItemsModel GetPurchaseOrderItem(HttpClient USISDKClient, string astrOrgCode, int aintNumber, int aintItemSequence)
     {
       Task<UngerboeckSDKPackage.PurchaseOrderItemsModel> purchaseOrderItemTask =
           GetAsync<UngerboeckSDKPackage.PurchaseOrderItemsModel>(USISDKClient, $"PurchaseOrderItems/{astrOrgCode}/{aintNumber}/{aintItemSequence}");
@@ -944,6 +1052,48 @@ namespace UngerboeckSDKWrapper
       APIUtil.SuccessResponse(response);
     }
 
+    public static FunctionSeatingChartsModel GetFunctionSeatingChart(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber)
+    {
+      Task<FunctionSeatingChartsModel> functionSeatingChartTask = GetAsync<FunctionSeatingChartsModel>(USISDKClient,
+                                                                                                       $"FunctionSeatingCharts/{astrOrgCode}/{aintSequenceNumber}");
+      return functionSeatingChartTask.Result;
+    }
+
+    public static FunctionSeatingChartsModel AddFunctionSeatingChart(HttpClient USISDKClient, FunctionSeatingChartsModel @functionSeatingChart)
+    {
+      Task<FunctionSeatingChartsModel> functionSeatingChartTask = PostAsync(USISDKClient, "FunctionSeatingCharts", @functionSeatingChart);
+      return functionSeatingChartTask.Result;
+    }
+
+    public static FunctionSeatingChartsModel UpdateFunctionSeatingChart(HttpClient USISDKClient, FunctionSeatingChartsModel @functionSeatingChart)
+    {
+      Task<FunctionSeatingChartsModel> functionSeatingChartTask = PutAsync(USISDKClient,
+                                                                           $"FunctionSeatingCharts/{@functionSeatingChart.OrgCode}/{@functionSeatingChart.SequenceNumber}",
+                                                                           @functionSeatingChart);
+      return functionSeatingChartTask.Result;
+    }
+
+    public static RegistrationAssignmentsModel GetRegistrationAssignment(HttpClient USISDKClient, string astrOrgCode, int aintSequenceNumber)
+    {
+      Task<RegistrationAssignmentsModel> registrationAssignmentTask = GetAsync<RegistrationAssignmentsModel>(USISDKClient,
+                                                                                                             $"RegistrationAssignments/{astrOrgCode}/{aintSequenceNumber}");
+      return registrationAssignmentTask.Result;
+    }
+
+    public static RegistrationAssignmentsModel AddRegistrationAssignment(HttpClient USISDKClient, RegistrationAssignmentsModel @registrationAssignment)
+    {
+      Task<RegistrationAssignmentsModel> registrationAssignmentTask = PostAsync(USISDKClient, "RegistrationAssignments", @registrationAssignment);
+      return registrationAssignmentTask.Result;
+    }
+
+    public static RegistrationAssignmentsModel UpdateRegistrationAssignment(HttpClient USISDKClient, RegistrationAssignmentsModel @registrationAssignement)
+    {
+      Task<RegistrationAssignmentsModel> registrationAssignmentTask = PutAsync(USISDKClient,
+                                                                               $"RegistrationAssignments/{@registrationAssignement.OrgCode}/{@registrationAssignement.SequenceNumber}",
+                                                                               @registrationAssignement);
+      return registrationAssignmentTask.Result;
+    }
+
     public static UngerboeckSDKPackage.CommunicationsModel GetCommunication(HttpClient USISDKClient, string astrOrgCode, string astrAccountCode, int aintSequenceNumber)
     {
       Task<UngerboeckSDKPackage.CommunicationsModel> communicationTask = GetAsync<UngerboeckSDKPackage.CommunicationsModel>(USISDKClient, $"Communications/{astrOrgCode}/{astrAccountCode}/{aintSequenceNumber}");
@@ -967,6 +1117,13 @@ namespace UngerboeckSDKWrapper
       HttpResponseMessage response = await USISDKClient.DeleteAsync(
           $"{USISDKClient.BaseAddress}/api/v1/Communications/{astrOrgCode}/{astrAccountCode}/{aintSequenceNumber}").ConfigureAwait(false);
       APIUtil.SuccessResponse(response);
+    }
+
+    public static UngerboeckSDKPackage.OrderStatusesModel GetOrderStatus(HttpClient USISDKClient, string astrOrgCode, string astrCode)
+    {
+      Task<UngerboeckSDKPackage.OrderStatusesModel> OrderStatus =
+          GetAsync<UngerboeckSDKPackage.OrderStatusesModel>(USISDKClient, $"OrderStatuses/{astrOrgCode}/{astrCode}");
+      return OrderStatus.Result;
     }
 
     public static UngerboeckSDKPackage.EventStatusesModel GetEventStatus(HttpClient USISDKClient, string astrOrgCode, string astrCode)
@@ -1542,6 +1699,99 @@ namespace UngerboeckSDKWrapper
       Task<UngerboeckSDKPackage.WebhooksModel> webHookTask = GetAsync<UngerboeckSDKPackage.WebhooksModel>(USISDKClient, $"Webhooks/{astrOrgCode}/{aintSequenceNumber}");
       return webHookTask.Result;
     }
+
+    public static UngerboeckSDKPackage.UsersModel GetUser(HttpClient USISDKClient, string ID)
+    {
+      Task<UngerboeckSDKPackage.UsersModel> userTask = GetAsync<UngerboeckSDKPackage.UsersModel>(USISDKClient, $"Users/{ID}");
+      return userTask.Result;
+    }
+
+    public static UngerboeckSDKPackage.UsersModel AddUser(HttpClient USISDKClient, UngerboeckSDKPackage.UsersModel user)
+    {
+      Task<UngerboeckSDKPackage.UsersModel> userTask = PostAsync(USISDKClient, "Users", user);
+      return userTask.Result;
+    }
+
+    public static UngerboeckSDKPackage.UsersModel UpdateUser(HttpClient USISDKClient, UngerboeckSDKPackage.UsersModel user)
+    {
+      Task<UngerboeckSDKPackage.UsersModel> userTask = PutAsync(USISDKClient, $"Users/{user.ID}", user);
+      return userTask.Result;
+    }
+
+    /// <summary>
+    /// This will send out an email to the user.  The user information will not be modified.
+    /// </summary>    
+    public static HttpResponseMessage SendActivateUserEmail(HttpClient USISDKClient, string astrOrgCode, string astrID)
+    {
+      Task<HttpResponseMessage> response = USISDKClient.PutAsync($"{USISDKClient.BaseAddress}/api/v1/Users/{astrID}/ResetPassword", null);
+      return response.Result;
+    }
+
+    /// <summary>
+    /// This will make a new user from the user with the User ID of the sourceID parameter.
+    /// </summary>  
+    public static UsersModel CopyUser(HttpClient USISDKClient, string sourceID, UngerboeckSDKPackage.Copy.Users user)
+    {
+      Task<UsersModel> response = PutAsync<UngerboeckSDKPackage.Copy.Users, UsersModel>(USISDKClient, $"Users/{sourceID}/Copy", user);
+      return response.Result;
+    }
+
+    public static UngerboeckSDKPackage.RolesModel GetRole(HttpClient USISDKClient, string ID)
+    {
+      Task<UngerboeckSDKPackage.RolesModel> RoleTask = GetAsync<UngerboeckSDKPackage.RolesModel>(USISDKClient, $"Roles/{ID}");
+      return RoleTask.Result;
+    }
+
+    public static UngerboeckSDKPackage.RolesModel AddRole(HttpClient USISDKClient, UngerboeckSDKPackage.RolesModel Role)
+    {
+      Task<UngerboeckSDKPackage.RolesModel> RoleTask = PostAsync(USISDKClient, "Roles", Role);
+      return RoleTask.Result;
+    }
+
+    public static UngerboeckSDKPackage.RolesModel UpdateRole(HttpClient USISDKClient, UngerboeckSDKPackage.RolesModel Role)
+    {
+      Task<UngerboeckSDKPackage.RolesModel> RoleTask = PutAsync(USISDKClient, $"Roles/{Role.ID}", Role);
+      return RoleTask.Result;
+    }
+
+    /// <summary>
+    /// Get a User Role.  
+    /// </summary>
+    /// <param name="USISDKClient"></param>
+    /// <param name="user">The User ID</param>
+    /// <param name="role">The Role ID</param>
+    /// <returns>A single UserRole model</returns>
+    public static UngerboeckSDKPackage.UserRolesModel GetUserRole(HttpClient USISDKClient, string user, string role)
+    {
+      Task<UngerboeckSDKPackage.UserRolesModel> UserRoleTask = GetAsync<UngerboeckSDKPackage.UserRolesModel>(USISDKClient, $"UserRoles/{user}/{role}");
+      return UserRoleTask.Result;
+    }
+
+    /// <summary>
+    /// Add a user to a role.  You can do more than one.  You can include a comma delimited list of User ID's or Role ID's, but not both.
+    /// </summary>
+    /// <param name="USISDKClient"></param>
+    /// <param name="UserRole">A UserRoleModel representing a new relationship. You can include a comma delimited list of User ID's or Role ID's, but not both.</param>
+    /// <returns></returns>
+    public static string AddUserRole(HttpClient USISDKClient, UngerboeckSDKPackage.UserRolesModel UserRole)
+    {
+      Task<string> UserRoleTask = PostAsync<UserRolesModel, string>(USISDKClient, "UserRoles", UserRole);
+      return UserRoleTask.Result;
+    }
+
+    /// <summary>
+    /// Remove a User from a Role.  
+    /// </summary>
+    /// <param name="USISDKClient"></param>
+    /// <param name="user">The User ID.  You can include a comma delimited list of User ID's or Role ID's, but not both.</param>
+    /// <param name="role">The Role ID.  You can include a comma delimited list of User ID's or Role ID's, but not both.</param>
+    /// <returns>A single UserRole model</returns>
+    public static string DeleteUserRole(HttpClient USISDKClient, string user, string role)
+    {
+      Task<string> UserRoleTask = DeleteAsync<string>(USISDKClient, $"UserRoles/{user}/{role}");
+      return UserRoleTask.Result;
+    }
+
     public static UngerboeckSDKPackage.UngerboeckAuthenticationCheck CheckUngerboeckUserAuthentication(HttpClient USISDKClient, string userID, string password, string ungerboeckURI, string userIDToCheck, string userPasswordToCheck)
     {
       // This endpoint can be used to check authorization of a user (i.e., you wish to make a login/access page for users for your website that also have Ungerboeck users)

@@ -3,6 +3,7 @@ using UngerboeckSDKWrapper;
 using UngerboeckSDKPackage;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace Examples.Operations
 {
@@ -92,8 +93,19 @@ namespace Examples.Operations
       myUserField.Type = issueType; //Use the Opportunity Type code from your user field.  This matches the value stored in Ungerboeck table column CR073_ISSUE_TYPE.
       myUserField.UserText12 = newTxt12Value; //Set the value in the user field property
       myEvent.EventUserFieldSets.Add(myUserField); //Then add it back into the EventModel object.  You can add multiple user field sets to the same event object before saving.
-      
+
       return APIUtil.AddEvent(USISDKClient, myEvent);
+    }
+
+    public EventsModel EditWithUserFields(string orgCode, int eventID, string issueType, DateTime newDate02Value)
+    {
+      var myEvent = APIUtil.GetEvent(USISDKClient, orgCode, eventID);
+
+      //Here's how to edit a user field set with values on an existing event
+      var myEventUDFSet = (from o in myEvent.EventUserFieldSets where o.Type == issueType select o).FirstOrDefault();
+      myEventUDFSet.UserDateTime02 = newDate02Value; //Set the value in the user field property
+
+      return APIUtil.UpdateEvent(USISDKClient, myEvent);
     }
 
     /// <summary>

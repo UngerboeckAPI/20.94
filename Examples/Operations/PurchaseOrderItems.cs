@@ -16,7 +16,7 @@ namespace Examples.Operations
         /// </summary>
         public PurchaseOrderItemsModel Get(string orgCode, int number, int itemSequence)
         {
-          return APIUtil.GetPurchaseOrderItems(USISDKClient, orgCode, number, itemSequence);
+          return APIUtil.GetPurchaseOrderItem(USISDKClient, orgCode, number, itemSequence);
         }
 
         /// <summary>

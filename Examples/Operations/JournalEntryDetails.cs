@@ -27,5 +27,39 @@ namespace Examples.Operations
       SearchMetadataModel searchMetadata = null;
       return APIUtil.GetSearchList<JournalEntryDetailsModel>(USISDKClient, ref searchMetadata, orgCode, "All");
     }
+
+    /// <summary>
+    /// Adds a Journal Entry 
+    /// </summary>
+    public JournalEntryDetailsModel Add(string orgCode, int Event, int year, int period, string source, string entryNumber, string status, string description, System.DateTime date)
+    {
+      var myJournalEntryDetail = new JournalEntryDetailsModel
+      {
+        Organization = orgCode,
+        Event = Event,
+        Year = year,
+        Period = period,
+        Source = source,
+        EntryNumber = entryNumber,
+        Status = status,
+        Description = description,
+        Date = date
+      };
+
+      return APIUtil.AddJournalEntryDetail(USISDKClient, myJournalEntryDetail);
+    }
+
+    /// <summary>
+    /// Updates an existing journal entry by updating the description value
+    /// </summary>
+    public JournalEntryDetailsModel Edit(string orgCode, int year, int period, string source, string entryNumber, int line)
+    {
+      JournalEntryDetailsModel journalEntryDetailModel = APIUtil.GetJournalEntryDetails(USISDKClient, orgCode, year, period, source, entryNumber, line);
+      string description = journalEntryDetailModel.Description + " : description edited via test " + System.DateTime.Now.ToString();
+      journalEntryDetailModel.Description = description;
+
+      journalEntryDetailModel = APIUtil.UpdateJouralEntryDetail(USISDKClient, journalEntryDetailModel);
+      return journalEntryDetailModel;
+    }
   }
 }

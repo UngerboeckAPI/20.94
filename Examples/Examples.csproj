@@ -45,8 +45,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="UngerboeckSDKPackage, Version=20.9.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ungerboeck2094SDK.20.94.2.1\lib\net45\UngerboeckSDKPackage.dll</HintPath>
+    <Reference Include="UngerboeckSDKPackage, Version=20.94.3.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ungerboeck2094SDK.20.94.3.1\lib\net45\UngerboeckSDKPackage.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -89,8 +89,13 @@
     <Compile Include="Operations\EventStatuses.cs" />
     <Compile Include="Operations\Exhibitors.cs" />
     <Compile Include="Operations\Functions.cs" />
+    <Compile Include="Operations\FunctionSeatingCharts.cs" />
     <Compile Include="Operations\General.cs" />
     <Compile Include="Operations\GLAccounts.cs" />
+    <Compile Include="Operations\OrderStatuses.cs" />
+    <Compile Include="Operations\InventoryItems.cs" />
+    <Compile Include="Operations\InventoryStats.cs" />
+    <Compile Include="Operations\InventorySuppliers.cs" />
     <Compile Include="Operations\Invoices.cs" />
     <Compile Include="Operations\JournalEntries.cs" />
     <Compile Include="Operations\JournalEntryDetails.cs" />
@@ -109,6 +114,9 @@
     <Compile Include="Operations\PaymentPlanDetails.cs" />
     <Compile Include="Operations\PaymentPlanHeaders.cs" />
     <Compile Include="Operations\PaymentPlans.cs" />
+    <Compile Include="Operations\UserRoles.cs" />
+    <Compile Include="Operations\Roles.cs" />
+    <Compile Include="Operations\Users.cs" />
     <Compile Include="Operations\Payments.cs" />
     <Compile Include="Operations\PreferenceSettings.cs" />
     <Compile Include="Operations\PriceList.cs" />
@@ -117,6 +125,7 @@
     <Compile Include="Operations\PurchaseOrderItems.cs" />
     <Compile Include="Operations\PurchaseOrders.cs" />
     <Compile Include="Operations\Quotes.cs" />
+    <Compile Include="Operations\RegistrationAssignments.cs" />
     <Compile Include="Operations\RegistrationOrderItems.cs" />
     <Compile Include="Operations\RegistrationOrders.cs" />
     <Compile Include="Operations\Relationships.cs" />
@@ -141,14 +150,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\UngerboeckSDKWrapper\UngerboeckSDKWrapper.csproj">
       <Project>{54aa76b0-e061-4467-8625-5c16ede638f0}</Project>
       <Name>UngerboeckSDKWrapper</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
